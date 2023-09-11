@@ -4,70 +4,109 @@ using UnityEngine;
 public enum EnemyState {
     Wander,
     Follow,
+    Shoot,
     Die,
 };
 
+[RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(EnemyShot))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour {
 
-    private GameObject player;
-    public EnemyState currentState = EnemyState.Wander;
-    public float range;
-    public float speed;
+    // - Constructed
+    private float followRange;
+    private float shotRange;    
+
+    public EnemyMovement enemyMovement;
+    public EnemyShot enemyShot;
+    private Rigidbody2D enemyRigidbody;
+
+    private Player player;
+
+    private EnemyState currentState = EnemyState.Wander;
+    private Vector2 newDirection;
     private bool chooseDirection = false;
-    private bool isDead = false;
-    private Vector3 randomDirection;
+
+    public void Construct(float followRange, float shotRange, float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+        this.followRange = followRange;
+        this.shotRange = shotRange;
+        this.Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+    }
+
+    public void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+        enemyMovement.Construct(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed);
+        enemyShot.Construct(spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+    }
+
+    private void Awake() {
+        enemyMovement = GetComponent<EnemyMovement>();
+        enemyShot = GetComponent<EnemyShot>();
+        enemyRigidbody = GetComponent<Rigidbody2D>();
+    }
 
     private void Start() {
-        player = Player.Instance.gameObject;
+        player = Player.Instance;
     }
 
     private void Update() {
-        switch(currentState) {
-            case (EnemyState.Wander):
-                Wander();
-                break;
-            case (EnemyState.Follow):
-                Follow();
-                break;
-            case (EnemyState.Die):
-                break;
-        }
-
         if (currentState != EnemyState.Die) {
-            if (IsPlayerInRange(range)) {
+            if (IsPlayerInRange(followRange) && !IsPlayerInRange(shotRange)) {
                 currentState = EnemyState.Follow;
-            } else  {
+            } else if (IsPlayerInRange(shotRange)) {
+                currentState = EnemyState.Shoot;
+            } else {
                 currentState = EnemyState.Wander;
             }
         }
-        
+    }
+
+    private void FixedUpdate() {
+        switch(currentState) {
+            case (EnemyState.Wander):
+                if (!chooseDirection) {
+                    StartCoroutine(ChooseDirection());
+                }
+                
+                enemyMovement.Move(newDirection * Time.fixedDeltaTime);
+                break;
+            case (EnemyState.Follow):
+                newDirection = (player.transform.position - transform.position).normalized;
+                enemyMovement.Move(newDirection * Time.fixedDeltaTime);
+                break;
+            case (EnemyState.Shoot):
+                enemyMovement.Stop();
+                Vector2 shotDirection = (player.transform.position - transform.position).normalized;
+                enemyShot.Shot(shotDirection * Time.fixedDeltaTime, enemyRigidbody.velocity);
+                break;
+            case (EnemyState.Die):
+                enemyMovement.Stop();
+                break;
+        }
     }
 
     private bool IsPlayerInRange(float range) {
         return Vector3.Distance(transform.position, player.transform.position) <= range;
     }
 
-    private void Wander() { 
-        if (!chooseDirection) {
-            StartCoroutine(ChooseDirection());
-        }
-
-        transform.position += -transform.right * speed* Time.deltaTime;
-        if (IsPlayerInRange(range)) {
-            currentState = EnemyState.Follow;
-        }
-    }
-
     private IEnumerator ChooseDirection() {
         chooseDirection = true;
         yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
-        randomDirection = new Vector3(0, 0, Random.Range(0, 360));
-        Quaternion nextRotation = Quaternion.Euler(randomDirection);
-        // transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Random.Range(0.5f, 2.5f));
+  
+        bool isXAxis = Random.Range(0f, 1f) >= 0.5f;
+        int[] possibleValues = {-1, 1};
+        int newValue = possibleValues[Random.Range(0, possibleValues.Length)];
+
+        newDirection = new Vector2(
+            isXAxis ? newValue : 0,
+            isXAxis ? 0 : newValue);
         chooseDirection = false;
     }
 
-    private void Follow() {
-       transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+    public void InvertMovingDirection() {
+        newDirection = -newDirection;
+    }
+
+    public void Kill() {
+        currentState = EnemyState.Die;
     }
 }

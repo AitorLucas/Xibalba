@@ -44,6 +44,51 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ShotDirection"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebb35a66-c8ab-4e99-94fc-6e1f847539b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""7683c37a-88e3-4c41-a196-0a692a1defbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavySpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a219f0f-58cd-4cd8-8f65-ca8adc387d65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b7ee740-ecaf-4f81-8c87-766ee26b6bed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""28285352-ba38-4d3d-9a30-19a635032d60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +201,61 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84855a34-f696-4d6f-aa64-0b3b983fa858"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShotDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98c7281e-1821-4bf9-9bb4-eceb3406f9f9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90f8f71c-1d51-4d3c-b759-9643a082b9a3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavySpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1940d287-7740-4bc2-97a0-afb1a7fa9ae6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15ce5b41-22a2-43ff-a900-f0c6494c5fb9"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +266,11 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_ShotFire = m_Player.FindAction("ShotFire", throwIfNotFound: true);
+        m_Player_ShotDirection = m_Player.FindAction("ShotDirection", throwIfNotFound: true);
+        m_Player_LightSpell = m_Player.FindAction("LightSpell", throwIfNotFound: true);
+        m_Player_HeavySpell = m_Player.FindAction("HeavySpell", throwIfNotFound: true);
+        m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,12 +334,22 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_ShotFire;
+    private readonly InputAction m_Player_ShotDirection;
+    private readonly InputAction m_Player_LightSpell;
+    private readonly InputAction m_Player_HeavySpell;
+    private readonly InputAction m_Player_CastSpell;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @GameInputActions m_Wrapper;
         public PlayerActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @ShotFire => m_Wrapper.m_Player_ShotFire;
+        public InputAction @ShotDirection => m_Wrapper.m_Player_ShotDirection;
+        public InputAction @LightSpell => m_Wrapper.m_Player_LightSpell;
+        public InputAction @HeavySpell => m_Wrapper.m_Player_HeavySpell;
+        public InputAction @CastSpell => m_Wrapper.m_Player_CastSpell;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +365,21 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @ShotFire.started += instance.OnShotFire;
             @ShotFire.performed += instance.OnShotFire;
             @ShotFire.canceled += instance.OnShotFire;
+            @ShotDirection.started += instance.OnShotDirection;
+            @ShotDirection.performed += instance.OnShotDirection;
+            @ShotDirection.canceled += instance.OnShotDirection;
+            @LightSpell.started += instance.OnLightSpell;
+            @LightSpell.performed += instance.OnLightSpell;
+            @LightSpell.canceled += instance.OnLightSpell;
+            @HeavySpell.started += instance.OnHeavySpell;
+            @HeavySpell.performed += instance.OnHeavySpell;
+            @HeavySpell.canceled += instance.OnHeavySpell;
+            @CastSpell.started += instance.OnCastSpell;
+            @CastSpell.performed += instance.OnCastSpell;
+            @CastSpell.canceled += instance.OnCastSpell;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -260,6 +390,21 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @ShotFire.started -= instance.OnShotFire;
             @ShotFire.performed -= instance.OnShotFire;
             @ShotFire.canceled -= instance.OnShotFire;
+            @ShotDirection.started -= instance.OnShotDirection;
+            @ShotDirection.performed -= instance.OnShotDirection;
+            @ShotDirection.canceled -= instance.OnShotDirection;
+            @LightSpell.started -= instance.OnLightSpell;
+            @LightSpell.performed -= instance.OnLightSpell;
+            @LightSpell.canceled -= instance.OnLightSpell;
+            @HeavySpell.started -= instance.OnHeavySpell;
+            @HeavySpell.performed -= instance.OnHeavySpell;
+            @HeavySpell.canceled -= instance.OnHeavySpell;
+            @CastSpell.started -= instance.OnCastSpell;
+            @CastSpell.performed -= instance.OnCastSpell;
+            @CastSpell.canceled -= instance.OnCastSpell;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -281,5 +426,10 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShotFire(InputAction.CallbackContext context);
+        void OnShotDirection(InputAction.CallbackContext context);
+        void OnLightSpell(InputAction.CallbackContext context);
+        void OnHeavySpell(InputAction.CallbackContext context);
+        void OnCastSpell(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

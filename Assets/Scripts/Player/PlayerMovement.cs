@@ -4,25 +4,32 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour {
 
-    [Range(0, .3f)][SerializeField] private float movementSmoothing = .05f;
+    // - Constructed
+    private float movementSmoothing;
+    private float movementSpeed;
 
-    private Rigidbody2D playerRigidbody;
+    private Rigidbody2D rigidbody;
     private Animator animator;
 
-    private Vector3 maxVelocity = Vector3.one;
+    // private Vector3 maxVelocity = Vector3.one;
     private bool isFacingRight = false;
 
+    public void Construct(float movementSmoothing, float movementSpeed) {
+        this.movementSmoothing = movementSmoothing;
+        this.movementSpeed = movementSpeed;
+    }
+
     private void Awake() {
-        playerRigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
-    public void Move(Vector2 movement, float speed) {
+    public void Move(Vector2 movement) {
         // TODO: ADD SMOOTHNESS
         // playerRigidbody.velocity = Vector3.SmoothDamp(playerRigidbody.velocity, moveVelocity, ref maxVelocity, movementSmoothing);
         // playerRigidbody.MovePosition(playerRigidbody.position + movement * speed);
         float kMagicNumber = 30f;
-        playerRigidbody.velocity = movement * speed * kMagicNumber;
+        rigidbody.velocity = movement * movementSpeed * kMagicNumber;
        
         if (movement.x > 0 && isFacingRight) {
             FlipHorizontal();
@@ -36,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Stop() {
-        playerRigidbody.velocity = Vector2.zero;
+        rigidbody.velocity = Vector2.zero;
         animator.SetBool("IsMoving", false);
     }
 

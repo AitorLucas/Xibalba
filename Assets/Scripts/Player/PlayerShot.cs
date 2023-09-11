@@ -3,24 +3,34 @@ using UnityEngine;
 
 public class PlayerShot : MonoBehaviour {
 
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private Projectile projectilePreFab;
-    [Range(0.1f, 3.0f)][SerializeField] private float shootDelay = 1.0f;
+    // - Constructed
+    private Transform[] spawnPoints;
+    private Projectile projectilePreFab;
+    private float shotDelay;
+    private float shotSpeed;
 
     private bool canShoot = true;
 
-    public void Shoot(Vector2 shot, Vector2 playerVelocity, float speed) {
+    public void Construct(Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+        this.spawnPoints = spawnPoints;
+        this.projectilePreFab = projectilePreFab;
+        this.shotDelay = shotDelay;
+        this.shotSpeed = shotSpeed;
+    }
+
+    public void Shot(Vector2 shotDirection, Vector2 playerVelocity) {        
         if (canShoot) {
             foreach (var spawnpoint in spawnPoints) {
                 Projectile projectile = Instantiate(projectilePreFab, spawnpoint.position, Quaternion.identity);
-                projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shot.x, shot.y)) * Mathf.Rad2Deg);
+                projectile.WasShootBy = ProjectileFrom.Player;
+                projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
 
                 Rigidbody2D projectileRigidBody = projectile.GetComponent<Rigidbody2D>();
 
-                projectileRigidBody.velocity = playerVelocity / 1.5f; // Adds a bit of starting speed according to player movement
+                projectileRigidBody.velocity = playerVelocity / 2; // Adds a bit of starting speed according to player movement
                 
                 float kMagicNumber = 10f;
-                projectileRigidBody.AddForce(shot * speed * kMagicNumber, ForceMode2D.Impulse);
+                projectileRigidBody.AddForce(shotDirection * shotSpeed * kMagicNumber, ForceMode2D.Impulse);
             }
 
             canShoot = false;
@@ -29,7 +39,11 @@ public class PlayerShot : MonoBehaviour {
     }
 
     private IEnumerator ShootDelay() {
-        yield return new WaitForSeconds(shootDelay);
+        yield return new WaitForSeconds(shotDelay);
         canShoot = true;
     }
+
+    public void Spell(Vector2 spellDirection, SpellType spellType, Vector2 playerVelocity) {
+
+    } 
 }
