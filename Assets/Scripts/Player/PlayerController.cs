@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Start() {
-        InputManager.Instance.OnSpellCastAction += InputManager_OnSpellCastAction;
-        InputManager.Instance.OnLightSpellSelectedAction += InputManager_OnLightSpellSelectedAction;
-        InputManager.Instance.OnHeavySpellSelectedAction += InputManager_OnHeavySpellSelectedAction;
-        InputManager.Instance.OnDashAction += InputManager_OnDashAction;
+        InputManager.Instance.OnPlayerSpellCastAction += InputManager_OnPlayerSpellCastAction;
+        InputManager.Instance.OnPlayerLightSpellSelectedAction += InputManager_OnPlayerLightSpellSelectedAction;
+        InputManager.Instance.OnPlayerHeavySpellSelectedAction += InputManager_OnPlayerHeavySpellSelectedAction;
+        InputManager.Instance.OnPlayerDashAction += InputManager_OnPlayerDashAction;
     }
 
     private void Update() {
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
         isMoving = (movementVector != Vector2.zero);
 
         // Debug.Log("Mouse: " + InputManager.Instance.GetShotDirectionVector() + Mouse.current.position.ReadValue());
-        // Debug.Log("Mouse: " + InputManager.Instance.GetShotDirectionVector());
+        Debug.Log("Mouse: " + InputManager.Instance.GetShotDirectionVector());
 
         // Vector3 camDis = new Vector3(InputManager.Instance.GetShotDirectionVector().x, InputManager.Instance.GetShotDirectionVector().y, camera.transform.position.z);
         // Vector3 mousepos = camera.ScreenToWorldPoint(camDis);
@@ -83,19 +83,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void InputManager_OnSpellCastAction(object sender, EventArgs e) {
+    private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
 
     }
 
-    private void InputManager_OnLightSpellSelectedAction(object sender, EventArgs e) {
+    private void InputManager_OnPlayerLightSpellSelectedAction(object sender, EventArgs e) {
         currentSpellState = SpellType.Light;
     }
 
-    private void InputManager_OnHeavySpellSelectedAction(object sender, EventArgs e) {
+    private void InputManager_OnPlayerHeavySpellSelectedAction(object sender, EventArgs e) {
         currentSpellState = SpellType.Heavy;
     }
 
-    private void InputManager_OnDashAction(object sender, EventArgs e) {
-
+    private void InputManager_OnPlayerDashAction(object sender, EventArgs e) {
+        
     }
 }

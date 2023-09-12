@@ -258,6 +258,34 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""6acb6eb6-b38e-455d-85e8-c91ad2d2a49a"",
+            ""actions"": [
+                {
+                    ""name"": ""TogglePane"",
+                    ""type"": ""Button"",
+                    ""id"": ""74559047-c31f-4fa7-8c6f-f1b02c99a225"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1aecdeff-f671-4f85-8aa4-03c118c85094"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TogglePane"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -271,6 +299,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Player_HeavySpell = m_Player.FindAction("HeavySpell", throwIfNotFound: true);
         m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_TogglePane = m_Debug.FindAction("TogglePane", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -422,6 +453,52 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_TogglePane;
+    public struct DebugActions
+    {
+        private @GameInputActions m_Wrapper;
+        public DebugActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TogglePane => m_Wrapper.m_Debug_TogglePane;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @TogglePane.started += instance.OnTogglePane;
+            @TogglePane.performed += instance.OnTogglePane;
+            @TogglePane.canceled += instance.OnTogglePane;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @TogglePane.started -= instance.OnTogglePane;
+            @TogglePane.performed -= instance.OnTogglePane;
+            @TogglePane.canceled -= instance.OnTogglePane;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -431,5 +508,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnHeavySpell(InputAction.CallbackContext context);
         void OnCastSpell(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnTogglePane(InputAction.CallbackContext context);
     }
 }

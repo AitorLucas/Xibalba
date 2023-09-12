@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 3785394333550002074}
   - component: {fileID: 8321844582275103936}
   - component: {fileID: -4851974579400275941}
-  - component: {fileID: -4806899831415650033}
   - component: {fileID: 3854659934329944629}
   - component: {fileID: 6492544434396677287}
   - component: {fileID: 7171468517576743917}
   - component: {fileID: 8045704450193286847}
   - component: {fileID: 7819777761057767445}
   - component: {fileID: 1127366929835649450}
+  - component: {fileID: 1439253194704345060}
+  - component: {fileID: 1008482105227185839}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -121,51 +122,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &-4806899831415650033
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3976064865607017298}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.24}
-  m_EdgeRadius: 0
 --- !u!114 &3854659934329944629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,15 +176,15 @@ MonoBehaviour:
   experience: 10
   followRange: 8
   shotRange: 4
-  movementSpeed: 1
+  movementSpeed: 3
   movementSmoothing: 0.05
+  damageCollision: 0.5
   spawnPoints:
   - {fileID: 558963722487084969}
   projectilePreFab: {fileID: 5553539698169144576, guid: 562081cb8ea0aba4c825d06e2402260c,
     type: 3}
-  shotSpeed: 8
+  shotSpeed: 10
   shotDelay: 0.7
-  damageCollision: 0.5
 --- !u!95 &7819777761057767445
 Animator:
   serializedVersion: 5
@@ -262,6 +218,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 226e30fa2d7316340b13c4f9d291c574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &1439253194704345060
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3976064865607017298}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.04}
+  m_Size: {x: 0.2, y: 0.25}
+  m_Direction: 0
+--- !u!114 &1008482105227185839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3976064865607017298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &7205948474857673777
 GameObject:
   m_ObjectHideFlags: 0

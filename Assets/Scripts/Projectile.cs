@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour {
 
     [Range(1, 3f)][SerializeField] private float lifeTime = 1f;
 
-    private float damage = 2f; // ADD TO CONSTRUCT
+    private float damage = 1f; // ADD TO CONSTRUCT
     public ProjectileFrom WasShootBy = ProjectileFrom.Player;
 
     private void Start() {

@@ -10,16 +10,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4806899831415650033, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
-      propertyPath: m_Size.x
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: -4806899831415650033, guid: 546ba7eac2b61b84492b6428f834315d,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4806899831415650033, guid: 546ba7eac2b61b84492b6428f834315d,
-        type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.31
       objectReference: {fileID: 0}
@@ -88,6 +78,27 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: f2692763365d4914cb0f90fba9397102, type: 2}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: shotRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: shotSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: followRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: projectilePreFab
+      value: 
+      objectReference: {fileID: 5553539698169144576, guid: ceba28881d7d28d4bb6c8506b8367d7f,
+        type: 3}
     - target: {fileID: 8321844582275103936, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
       propertyPath: m_Sprite

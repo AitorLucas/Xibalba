@@ -50,7 +50,7 @@ public class Player : ISingleton<Player> {
         }
 
         OnPlayerLifeChanged?.Invoke(this, new OnPlayerLifeChangedArgs {
-            currentLife = this.lifes
+            currentLifeNormalized = this.lifes / this.maxLifes
         });
     }
 
@@ -59,12 +59,16 @@ public class Player : ISingleton<Player> {
         lifes = Mathf.Min(maxLifes, lifes);
 
         OnPlayerLifeChanged?.Invoke(this, new OnPlayerLifeChangedArgs {
-            currentLife = this.lifes
+            currentLifeNormalized = this.lifes / this.maxLifes
         });
     }
 
     private IEnumerator InvecibilityDelay() {
         yield return new WaitForSeconds(invecibilityDelay);
         isInvecible = false;
+    }
+
+    public bool IsDead() {
+        return lifes <= 0;
     }
 }

@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameManager : ISingleton<GameManager> {
 
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Enemy[] enemies;
+
     public EventHandler<OnScoreChangedArgs> OnScoreChanged;
     public class OnScoreChangedArgs : EventArgs {
         public int score;
@@ -10,37 +13,34 @@ public class GameManager : ISingleton<GameManager> {
     
     private int score = 0;
 
+    private void Start() {
+        SpawnEnemies();
+    }
+
     private void Update() {
-        if (IsGameOver()) {
-            return;
+        // if (IsGameOver()) {
+        //     return;
+        // }
+
+    }
+
+    public void SpawnEnemies() {
+        for(int i = 0; i < spawnPoints.Length; i++) {
+            Enemy enemy = Instantiate<Enemy>(enemies[UnityEngine.Random.Range(0, enemies.Length)], spawnPoints[i].position, Quaternion.identity);
+            enemy.OnEnemyDestroy += Enemy_OnEnemyDestroy;
         }
-
     }
-
-    private void SpawnEnemy() {
-
-    }
-
 
     public bool IsGameOver() {
-        return false; //Player.Instance.IsDead();
+        return Player.Instance.IsDead();
     }
 
-    private void Enemy_OnEnemyDestroy(Enemy sender, Enemy.OnEnemyDestroyArgs args) {
+    private void Enemy_OnEnemyDestroy(object sender, Enemy.OnEnemyDestroyArgs args) {
         if (IsGameOver()) {
             return;
         }
 
-
-
-        // Obstacle obstacle = sender as Obstacle;
-        // obstacleSpawnedList.Remove(obstacle);
-
-        // Destroy(obstacle.gameObject);
-
-        // AddPointsToScore((int)e.life);
-
-        // SpawnObstacles();
+        AddPointsToScore((int)args.experience);
     }
 
     private void AddPointsToScore(int points) {

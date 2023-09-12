@@ -14,6 +14,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5553539698169144576, guid: 562081cb8ea0aba4c825d06e2402260c,
         type: 3}
+    - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
+        type: 3}
+      propertyPath: shotSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5579482176398577884, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.x

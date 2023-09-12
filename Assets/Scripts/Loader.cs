@@ -7,8 +7,8 @@ public static class Loader {
         
     public enum Scene {
         InitialScene,
-        GameScene,
         LoadingScene,
+        GameScene,
     }
 
     private static Scene targetScene;

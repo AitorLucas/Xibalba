@@ -236,6 +236,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "6acb6eb6-b38e-455d-85e8-c91ad2d2a49a",
+            "actions": [
+                {
+                    "name": "TogglePane",
+                    "type": "Button",
+                    "id": "74559047-c31f-4fa7-8c6f-f1b02c99a225",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1aecdeff-f671-4f85-8aa4-03c118c85094",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TogglePane",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

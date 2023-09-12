@@ -60,8 +60,4 @@ public class Enemy : MonoBehaviour {
             Destroy(gameObject, 0.6f); // Death animation = 0.6s
         }
     }
-    
-    public void Kill() {
-        Destroy(gameObject);
-    }
 }

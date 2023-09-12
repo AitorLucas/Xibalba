@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class GameHUD_UI : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private Image lifeBarImage;
 
-    // private float timerCount;
+    private float timerCount;
 
     private void Start() {
         Player.Instance.OnPlayerLifeChanged += Player_OnPlayerLifeChanged;
@@ -16,8 +17,8 @@ public class GameHUD_UI : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        // timerCount += Time.fixedDeltaTime;
-        // scoreText.text = "Score: " + (int)timerCount;
+        timerCount += Time.fixedDeltaTime;
+        timeText.text = "Time: " + (int)timerCount;
     }
 
     private void Player_OnPlayerLifeChanged(object sender, Player.OnPlayerLifeChangedArgs args) {

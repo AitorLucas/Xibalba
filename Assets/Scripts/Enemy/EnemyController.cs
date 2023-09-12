@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using Pathfinding;
+using UnityEngine.Video;
 
 public enum EnemyState {
     Wander,
@@ -11,18 +13,24 @@ public enum EnemyState {
 [RequireComponent(typeof(EnemyMovement))]
 [RequireComponent(typeof(EnemyShot))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Seeker))]
 public class EnemyController : MonoBehaviour {
 
     // - Constructed
     private float followRange;
     private float shotRange;    
 
+    private Seeker seeker;
     public EnemyMovement enemyMovement;
     public EnemyShot enemyShot;
     private Rigidbody2D enemyRigidbody;
 
     private Player player;
 
+    private Path path;
+    private int currentWaypoint = 0;
+    private bool reachEndOfPath = false;
+    private float nextWaypointDistance = 1f;
     private EnemyState currentState = EnemyState.Wander;
     private Vector2 newDirection;
     private bool chooseDirection = false;
@@ -42,10 +50,13 @@ public class EnemyController : MonoBehaviour {
         enemyMovement = GetComponent<EnemyMovement>();
         enemyShot = GetComponent<EnemyShot>();
         enemyRigidbody = GetComponent<Rigidbody2D>();
+        seeker = GetComponent<Seeker>();
     }
 
     private void Start() {
         player = Player.Instance;
+
+        InvokeRepeating("UpdatePath", 0f, 0.5f); 
     }
 
     private void Update() {
@@ -56,6 +67,21 @@ public class EnemyController : MonoBehaviour {
                 currentState = EnemyState.Shoot;
             } else {
                 currentState = EnemyState.Wander;
+            }
+        }
+
+        if (path != null) {
+            if (currentWaypoint >= path.vectorPath.Count) {
+                reachEndOfPath = true;
+                return;
+            } else {
+                reachEndOfPath = false;
+            }
+
+            float distance = Vector2.Distance(enemyRigidbody.position, path.vectorPath[currentWaypoint]);
+
+            if (distance < nextWaypointDistance) {
+                currentWaypoint += 1;
             }
         }
     }
@@ -70,7 +96,11 @@ public class EnemyController : MonoBehaviour {
                 enemyMovement.Move(newDirection * Time.fixedDeltaTime);
                 break;
             case (EnemyState.Follow):
-                newDirection = (player.transform.position - transform.position).normalized;
+                if (path == null && !reachEndOfPath) {
+                    break;
+                }
+
+                newDirection = ((Vector2)path.vectorPath[currentWaypoint] - enemyRigidbody.position).normalized;
                 enemyMovement.Move(newDirection * Time.fixedDeltaTime);
                 break;
             case (EnemyState.Shoot):
@@ -81,6 +111,19 @@ public class EnemyController : MonoBehaviour {
             case (EnemyState.Die):
                 enemyMovement.Stop();
                 break;
+        }
+    }
+
+    private void UpdatePath() {
+        if (seeker.IsDone()) {
+            seeker.StartPath(enemyRigidbody.position, player.transform.position, OnPathComplete);
+        }
+    }  
+
+    private void OnPathComplete(Path path) {
+        if (!path.error) {
+            this.path = path;
+            currentWaypoint = 0; 
         }
     }
 
