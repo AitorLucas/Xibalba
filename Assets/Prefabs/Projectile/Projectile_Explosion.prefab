@@ -76,19 +76,19 @@ PrefabInstance:
     - target: {fileID: 869539450062403323, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       propertyPath: m_Name
-      value: Projectile_Breath
+      value: Projectile_Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 4693977541708313285, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1667540912, guid: 05daa9057a933cf489e07d8c1397e14b,
+      objectReference: {fileID: 339120741, guid: e89ad7df03392ca4c938257f54afbed6,
         type: 3}
-    - target: {fileID: 5339000712323283449, guid: 41bb0e1d2ba42104298277b1d757d1db,
+    - target: {fileID: 4693977541708313285, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 8fd73e1f47de341f5ab3e1c53aef8174, type: 2}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6359094128403517304, guid: 41bb0e1d2ba42104298277b1d757d1db, type: 3}
     m_RemovedGameObjects: []
@@ -97,11 +97,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 869539450062403323, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -4175084970191216990}
+      addedObject: {fileID: -8668427047236465942}
     - targetCorrespondingSourceObject: {fileID: 869539450062403323, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 946694363318870591}
+      addedObject: {fileID: -7871437479613443021}
   m_SourcePrefab: {fileID: 100100000, guid: 41bb0e1d2ba42104298277b1d757d1db, type: 3}
 --- !u!1 &4734768505342871016 stripped
 GameObject:
@@ -109,8 +109,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5594736667824173843}
   m_PrefabAsset: {fileID: 0}
---- !u!60 &-4175084970191216990
-PolygonCollider2D:
+--- !u!95 &-8668427047236465942
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734768505342871016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 285021fc99426432cb8ba7263fbe0b0e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &-7871437479613443021
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,59 +159,19 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 1, y: 0.5}
-    oldSize: {x: 9.84375, y: 7.8125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.46875, y: 0.46875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -1.546875, y: -0.609375}
-      - {x: -0.64062506, y: -0.484375}
-      - {x: -0.015625, y: 0.109375}
-      - {x: -1.859375, y: 0.671875}
-      - {x: -2.015625, y: -0.203125}
-      - {x: -1.671875, y: -0.484375}
-  m_UseDelaunayMesh: 0
---- !u!114 &946694363318870591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4734768505342871016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AlphaTolerance: 20
-  DistanceThreshold: 8
-  Scale: 1
-  Decompose: 0
-  RunInPlayMode: 0
-  UseCache: 0
-  lastAlphaTolerance: 20
-  lastScale: 1
-  lastDistanceThreshold: 8
-  lastDecompose: 0
-  lastSprite: {fileID: 1667540912, guid: 05daa9057a933cf489e07d8c1397e14b, type: 3}
-  lastRect:
-    serializedVersion: 2
-    x: 0
-    y: 500
-    width: 315
-    height: 250
-  lastOffset: {x: 315, y: 125}
-  lastPixelsPerUnit: 32
-  lastFlipX: 0
-  lastFlipY: 0
-  editorCache: []
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0

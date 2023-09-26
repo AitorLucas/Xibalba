@@ -76,17 +76,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
-        switch (currentSpellState) {
-            case SpellType.Heavy:
-                playerShot.ShotLaser(shotVector, playerRigidbody.velocity);
-                break;
-            case SpellType.Light:
-                playerShot.ShotLaser(shotVector, playerRigidbody.velocity);
-                break;
-            case SpellType.None:
-                // playerShot.ShotExplosion();
-                break;
-        }
+        playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState, playerVelocity: playerRigidbody.velocity);
     }
 
     private void InputManager_OnPlayerLightSpellSelectedAction(object sender, EventArgs e) {

@@ -20,6 +20,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9091894858810992137, guid: b285c677840ef2f4c9fe68720ff4c9a9,
         type: 3}
+    - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
+        type: 3}
+      propertyPath: breathPreFab
+      value: 
+      objectReference: {fileID: 9091894858810992137, guid: 05897d4d296977945b0e3c2a51af613f,
+        type: 3}
+    - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
+        type: 3}
+      propertyPath: explosionPreFab
+      value: 
+      objectReference: {fileID: 9091894858810992137, guid: ee43c8bf4a47e4622a13d9d63d0aad67,
+        type: 3}
     - target: {fileID: 5579482176398577884, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.x
