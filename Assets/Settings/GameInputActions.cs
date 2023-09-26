@@ -37,15 +37,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ShotFire"",
-                    ""type"": ""Value"",
-                    ""id"": ""f76d36a5-1b22-46a7-b865-f39953e780cf"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""ShotDirection"",
                     ""type"": ""Button"",
                     ""id"": ""ebb35a66-c8ab-4e99-94fc-6e1f847539b0"",
@@ -92,61 +83,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""a4531a54-b34c-4865-a375-257fc41ff5d8"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShotFire"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""be59881e-260c-44df-b8df-dda987278371"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShotFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""7d88ef37-5f88-4d96-8ea1-aa9b8612452c"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShotFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""9c0a6dba-402a-425b-9f8a-c57ce9851005"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShotFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""9b5878c0-4b43-4795-a7c6-dbe8e81df985"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShotFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""692b703a-6689-4d2f-8e02-07e5a7227365"",
@@ -293,7 +229,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_ShotFire = m_Player.FindAction("ShotFire", throwIfNotFound: true);
         m_Player_ShotDirection = m_Player.FindAction("ShotDirection", throwIfNotFound: true);
         m_Player_LightSpell = m_Player.FindAction("LightSpell", throwIfNotFound: true);
         m_Player_HeavySpell = m_Player.FindAction("HeavySpell", throwIfNotFound: true);
@@ -364,7 +299,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_ShotFire;
     private readonly InputAction m_Player_ShotDirection;
     private readonly InputAction m_Player_LightSpell;
     private readonly InputAction m_Player_HeavySpell;
@@ -375,7 +309,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         private @GameInputActions m_Wrapper;
         public PlayerActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @ShotFire => m_Wrapper.m_Player_ShotFire;
         public InputAction @ShotDirection => m_Wrapper.m_Player_ShotDirection;
         public InputAction @LightSpell => m_Wrapper.m_Player_LightSpell;
         public InputAction @HeavySpell => m_Wrapper.m_Player_HeavySpell;
@@ -393,9 +326,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @ShotFire.started += instance.OnShotFire;
-            @ShotFire.performed += instance.OnShotFire;
-            @ShotFire.canceled += instance.OnShotFire;
             @ShotDirection.started += instance.OnShotDirection;
             @ShotDirection.performed += instance.OnShotDirection;
             @ShotDirection.canceled += instance.OnShotDirection;
@@ -418,9 +348,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @ShotFire.started -= instance.OnShotFire;
-            @ShotFire.performed -= instance.OnShotFire;
-            @ShotFire.canceled -= instance.OnShotFire;
             @ShotDirection.started -= instance.OnShotDirection;
             @ShotDirection.performed -= instance.OnShotDirection;
             @ShotDirection.canceled -= instance.OnShotDirection;
@@ -502,7 +429,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnShotFire(InputAction.CallbackContext context);
         void OnShotDirection(InputAction.CallbackContext context);
         void OnLightSpell(InputAction.CallbackContext context);
         void OnHeavySpell(InputAction.CallbackContext context);

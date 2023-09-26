@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,8 +26,8 @@ public class EnemyMovement : MonoBehaviour {
 
     public void Move(Vector2 movement) {
         float kMagicNumber = 30f;
-        rigidbody.velocity = movement * movementSpeed * kMagicNumber;
-       
+        rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, movement * movementSpeed * kMagicNumber, movementSmoothing);
+
         if (movement.x > 0 && isFacingRight) {
             FlipHorizontal();
         } else if (movement.x < 0 && !isFacingRight) {
@@ -39,7 +40,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     public void Stop() {
-        rigidbody.velocity = Vector2.zero;
+        rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, Vector2.zero, movementSmoothing);
         animator.SetBool("IsMoving", false);
     }
 
@@ -53,5 +54,9 @@ public class EnemyMovement : MonoBehaviour {
         Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+    }
+
+    public void AddKnockback(Vector2 direction) {
+        rigidbody.AddForce(direction * 10f, ForceMode2D.Impulse);
     }
 }

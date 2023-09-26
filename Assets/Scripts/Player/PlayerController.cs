@@ -12,9 +12,6 @@ public enum SpellType {
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour {
     
-    // - Constructed
-    private Camera camera;
-
     private PlayerMovement playerMovement;
     private PlayerShot playerShot;
     private Rigidbody2D playerRigidbody;
@@ -25,14 +22,13 @@ public class PlayerController : MonoBehaviour {
     private Vector2 shotVector = Vector2.zero;
     private SpellType currentSpellState = SpellType.None;
 
-    public void Construct(Camera camera, float movementSpeed, float shotDelay, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, Projectile projectilePreFab) {
-        this.camera = camera;
-        this.Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+    public void Construct(float movementSpeed, float shotDelay, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, Projectile projectilePreFab, Projectile laserPreFab, Projectile breathPreFab, Projectile explosionPreFab) {
+        this.Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, laserPreFab: laserPreFab, breathPreFab: breathPreFab, explosionPreFab: explosionPreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
     }
 
-    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, Projectile laserPreFab, Projectile breathPreFab, Projectile explosionPreFab, float shotDelay, float shotSpeed) {
         playerMovement.Construct(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed);
-        playerShot.Construct(spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+        playerShot.Construct(spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, laserPreFab: laserPreFab, breathPreFab: breathPreFab, explosionPreFab: explosionPreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
     }
 
     private void Awake() {
@@ -48,27 +44,23 @@ public class PlayerController : MonoBehaviour {
         InputManager.Instance.OnPlayerDashAction += InputManager_OnPlayerDashAction;
     }
 
+    void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(20, 20, 250, 120));
+        GUILayout.Label("Player velocity: " + playerRigidbody.velocity);
+        GUILayout.EndArea();
+    }
+
     private void Update() {
         movementVector = InputManager.Instance.GetMovementVectorNormalized();
         isMoving = (movementVector != Vector2.zero);
 
-        // Debug.Log("Mouse: " + InputManager.Instance.GetShotDirectionVector() + Mouse.current.position.ReadValue());
-        Debug.Log("Mouse: " + InputManager.Instance.GetShotDirectionVector());
-
-        // Vector3 camDis = new Vector3(InputManager.Instance.GetShotDirectionVector().x, InputManager.Instance.GetShotDirectionVector().y, camera.transform.position.z);
-        // Vector3 mousepos = camera.ScreenToWorldPoint(camDis);
-
-         Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
-
-        Ray camRay = camera.ScreenPointToRay(mousePosition);
-        Debug.DrawRay(camRay.origin, camRay.direction * 1000, Color.red);
-
-        // Debug.Log("CAM: " + mousepos);
-
-        // shotVector = -mousepos.normalized;
-
-        shotVector = InputManager.Instance.GetShotVectorNormalized();
-        isShooting = (shotVector != Vector2.zero); 
+        Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
+        Vector2 playerPosition = transform.position;
+        Vector2 mouseInWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
+        mouseInWorldPosition = mouseInWorldPosition - playerPosition;
+        shotVector = mouseInWorldPosition.normalized;
+        isShooting = (shotVector != Vector2.zero);
     }
 
     private void FixedUpdate() {
@@ -84,7 +76,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
-
+        switch (currentSpellState) {
+            case SpellType.Heavy:
+                playerShot.ShotLaser(shotVector, playerRigidbody.velocity);
+                break;
+            case SpellType.Light:
+                playerShot.ShotLaser(shotVector, playerRigidbody.velocity);
+                break;
+            case SpellType.None:
+                // playerShot.ShotExplosion();
+                break;
+        }
     }
 
     private void InputManager_OnPlayerLightSpellSelectedAction(object sender, EventArgs e) {
@@ -96,6 +98,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerDashAction(object sender, EventArgs e) {
-        
+        playerMovement.Dash(movementVector);
     }
 }

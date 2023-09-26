@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1127366929835649450}
   - component: {fileID: 1439253194704345060}
   - component: {fileID: 1008482105227185839}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b4a6148128043b94394480d5ad1750c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 72432199
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
     type: 3}
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &-4851974579400275941
 Rigidbody2D:
   serializedVersion: 4
@@ -177,14 +177,14 @@ MonoBehaviour:
   followRange: 8
   shotRange: 4
   movementSpeed: 3
-  movementSmoothing: 0.05
+  movementSmoothing: 0.3
   damageCollision: 0.5
   spawnPoints:
   - {fileID: 558963722487084969}
   projectilePreFab: {fileID: 5553539698169144576, guid: 562081cb8ea0aba4c825d06e2402260c,
     type: 3}
-  shotSpeed: 10
-  shotDelay: 0.7
+  shotSpeed: 15
+  shotDelay: 0.5
 --- !u!95 &7819777761057767445
 Animator:
   serializedVersion: 5
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 558963722487084969}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}

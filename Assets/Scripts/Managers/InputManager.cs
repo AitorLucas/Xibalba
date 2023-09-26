@@ -17,7 +17,7 @@ public class InputManager : ISingleton<InputManager> {
         gameInputActions.Player.Enable();
         gameInputActions.Debug.Enable();
 
-        gameInputActions.Player.ShotFire.performed += PlayerCastSpell_Performed;
+        gameInputActions.Player.CastSpell.performed += PlayerCastSpell_Performed;
         gameInputActions.Player.LightSpell.performed += PlayerLightSpell_Performed;
         gameInputActions.Player.HeavySpell.performed += PlayerHeavySpell_Performed;
         gameInputActions.Player.Dash.performed += PlayerDash_Performed;
@@ -25,7 +25,7 @@ public class InputManager : ISingleton<InputManager> {
     }
 
     private void OnDestroy() {
-        gameInputActions.Player.ShotFire.performed -= PlayerCastSpell_Performed;
+        gameInputActions.Player.CastSpell.performed -= PlayerCastSpell_Performed;
         gameInputActions.Player.LightSpell.performed -= PlayerLightSpell_Performed;
         gameInputActions.Player.HeavySpell.performed -= PlayerHeavySpell_Performed;
         gameInputActions.Player.Dash.performed -= PlayerDash_Performed;
@@ -51,19 +51,18 @@ public class InputManager : ISingleton<InputManager> {
     }
 
     private void DebugTogglePane_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-        Debug.Log("Debug");
         OnDebugTogglePaneAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized() {
         Vector2 inputVector = gameInputActions.Player.Movement.ReadValue<Vector2>();
-        return inputVector.normalized;
+        return inputVector;
     }
 
-    public Vector2 GetShotVectorNormalized() {
-        Vector2 shotVector = gameInputActions.Player.ShotFire.ReadValue<Vector2>();
-        return shotVector.normalized;
-    }
+    // public Vector2 GetShotVectorNormalized() {
+    //     Vector2 shotVector = gameInputActions.Player.ShotFire.ReadValue<Vector2>();
+    //     return shotVector;
+    // }
 
     public Vector2 GetShotDirectionVector() {
         Vector2 shotVector = gameInputActions.Player.ShotDirection.ReadValue<Vector2>();

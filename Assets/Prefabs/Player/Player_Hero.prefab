@@ -16,9 +16,10 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
-      propertyPath: shotSpeed
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: laserPreFab
+      value: 
+      objectReference: {fileID: 9091894858810992137, guid: b285c677840ef2f4c9fe68720ff4c9a9,
+        type: 3}
     - target: {fileID: 5579482176398577884, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.x

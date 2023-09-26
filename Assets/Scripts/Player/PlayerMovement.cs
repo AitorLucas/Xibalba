@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D rigidbody;
     private Animator animator;
 
-    // private Vector3 maxVelocity = Vector3.one;
     private bool isFacingRight = false;
 
     public void Construct(float movementSmoothing, float movementSpeed) {
@@ -25,10 +24,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Move(Vector2 movement) {
-        // TODO: ADD SMOOTHNESS
-        // playerRigidbody.velocity = Vector3.SmoothDamp(playerRigidbody.velocity, moveVelocity, ref maxVelocity, movementSmoothing);
-        // playerRigidbody.MovePosition(playerRigidbody.position + movement * speed);
         float kMagicNumber = 30f;
+        // Debug.Log("Vel: " + rigidbody.velocity);
+        // rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, movement * movementSpeed * kMagicNumber, 0.3f);
         rigidbody.velocity = movement * movementSpeed * kMagicNumber;
        
         if (movement.x > 0 && isFacingRight) {
@@ -42,8 +40,12 @@ public class PlayerMovement : MonoBehaviour {
         animator.SetBool("IsMoving", true);
     }
 
+    public void Dash(Vector2 movement) {
+        rigidbody.AddForce(movement * 20f, ForceMode2D.Impulse);
+    }
+
     public void Stop() {
-        rigidbody.velocity = Vector2.zero;
+        rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, Vector2.zero, movementSmoothing);
         animator.SetBool("IsMoving", false);
     }
 

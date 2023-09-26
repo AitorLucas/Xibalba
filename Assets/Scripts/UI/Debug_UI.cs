@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Debug_UI : MonoBehaviour {
     
     [SerializeField] private Button respawnButton;
+    [SerializeField] private Button godModeButton;
 
     private bool isHidden = true;
 
@@ -16,6 +17,10 @@ public class Debug_UI : MonoBehaviour {
 
         respawnButton.onClick.AddListener(() => {
             GameManager.Instance.SpawnEnemies();
+        });
+
+        godModeButton.onClick.AddListener(() => {
+            Player.Instance.ToggleGodMode();
         });
     }
     

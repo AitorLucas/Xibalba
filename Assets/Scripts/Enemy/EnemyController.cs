@@ -100,7 +100,7 @@ public class EnemyController : MonoBehaviour {
                     break;
                 }
 
-                newDirection = ((Vector2)path.vectorPath[currentWaypoint] - enemyRigidbody.position).normalized;
+                newDirection = ((Vector2)path.vectorPath[currentWaypoint] - enemyRigidbody.position).normalized; // ITS CAUSING AN ERROR
                 enemyMovement.Move(newDirection * Time.fixedDeltaTime);
                 break;
             case (EnemyState.Shoot):

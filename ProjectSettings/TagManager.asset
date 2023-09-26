@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - Obstacle
-  - 
+  - Player
   - 
   - 
   - 
@@ -45,9 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Obstacle
+  - name: Foreground
     uniqueID: 72432199
     locked: 0
-  - name: Projetile
-    uniqueID: 2135719821
+  - name: GUI
+    uniqueID: 2632037853
     locked: 0
