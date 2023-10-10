@@ -15,4 +15,4 @@ MonoBehaviour:
   title: ExtraDamage
   description: Seus tiros causam 1 de dano extra
   improvementType: 7
-  improvementRarity: 5
+  improvementRarity: 6

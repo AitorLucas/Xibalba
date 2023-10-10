@@ -3,14 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Aim : ISingleton<Aim> {
 
-    [SerializeField] private Sprite shotSprite;
-    [SerializeField] private Sprite laserSprite;
-    [SerializeField] private Sprite explosionSprite;
-    [SerializeField] private Sprite breathSprite;
+    [SerializeField] private ProjectileSO shotProjectileSO;
+    [SerializeField] private ProjectileSO laserProjectileSO;
+    [SerializeField] private ProjectileSO explosionProjectileSO;
+    [SerializeField] private ProjectileSO breathProjectileSO;
+
 
     private SpriteRenderer spriteRenderer;
 
+    private SpellType currentSpellType = SpellType.None;
     private bool isClipped = true;
+    private Vector3 rotationForSprite = Vector3.one;
+    private bool isLaserGlobalRange = false;
+    private bool isExplosionPositionFree = false;
+    private float explosionRangeMultiplier = 1f;
 
     protected override void Awake() {
         base.Awake();
@@ -19,33 +25,67 @@ public class Aim : ISingleton<Aim> {
     }
 
     private void Start() {
-        Player.Instance.GetPlayerController().OnPlayerSpellTypeChanged += PlayerController_OnPlayerSpellTypeChanged;
+        Player player = Player.Instance;
+        player.GetPlayerController().OnSpellTypeChanged += PlayerController_OnSpellTypeChanged;
+        player.OnExplosionPositionFreeChanged += Player_OnExplosionPositionFreeChanged;
+        player.OnLaserGlobalRangeChanged += Player_OnLaserGlobalRangeChanged;
+        player.OnExplosionRangeMultiplierChanged += Player_OnExplosionRangeMultiplierChanged;
 
-        ChooseSprite(SpellType.None);
+        UpdateAim(SpellType.None);
     }
 
     private void Update() {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+
         Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
         Vector2 mouseInWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         Vector2 playerPosition = Player.Instance.transform.position;
-
         Vector2 playerToMouse = mouseInWorldPosition - playerPosition;
 
-        if (isClipped) { 
-            transform.position = playerPosition + (playerToMouse.normalized * 0.7f);
+        Vector2 spellPosition = Vector2.zero;
+        if (isClipped) {
+            if (currentSpellType == SpellType.Explosion) {
+                spellPosition = playerPosition;
+            } else {
+                spellPosition = playerPosition + (playerToMouse.normalized * 0.7f);
+            }
         } else {
-            transform.position = mouseInWorldPosition;
+            spellPosition = mouseInWorldPosition;
         }
+        transform.position = spellPosition;
 
-        Quaternion toRatation = Quaternion.LookRotation(Vector3.forward, playerToMouse);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRatation, 360);
+        Quaternion spellRotation = Quaternion.identity;
+        if (currentSpellType != SpellType.Explosion) {
+            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, playerToMouse);
+            spellRotation = Quaternion.RotateTowards(transform.rotation, toRotation, 360) * Quaternion.Euler(rotationForSprite);
+        }
+        transform.rotation = spellRotation;
     }
 
-    private void PlayerController_OnPlayerSpellTypeChanged(object sender, PlayerController.OnPlayerSpellTypeChangedArgs e) {
-        ChooseCliped(e.spellType);
-        ChooseSprite(e.spellType);
-        ScaleSprite(e.spellType);
-        RotateSprite(e.spellType);
+    private void PlayerController_OnSpellTypeChanged(object sender, PlayerController.OnSpellTypeChangedArgs e) {
+        UpdateAim(spellType: e.spellType);
+    }
+
+    private void Player_OnExplosionPositionFreeChanged(object sender, Player.OnExplosionPositionFreeChangedArgs e) {
+        isExplosionPositionFree = e.isActive;
+    }
+
+    private void Player_OnLaserGlobalRangeChanged(object sender, Player.OnLaserGlobalRangeChangedArgs e) {
+        isLaserGlobalRange = e.isActive;
+    }
+
+    private void Player_OnExplosionRangeMultiplierChanged(object sender, Player.OnExplosionRangeMultiplierChangedArgs e) {
+        explosionRangeMultiplier = e.multiplier;
+    }
+
+    private void UpdateAim(SpellType spellType) {
+        currentSpellType = spellType;
+        ChooseCliped(spellType);
+        ChooseSprite(spellType);
+        ScaleSprite(spellType);
+        RotateSprite(spellType);
     }
 
     private void ChooseCliped(SpellType spellType) {
@@ -60,7 +100,11 @@ public class Aim : ISingleton<Aim> {
                 isClipped = true;
                 break;
             case SpellType.Explosion:
-                isClipped = false;
+                if (isExplosionPositionFree) {
+                    isClipped = false;
+                } else {
+                    isClipped = true;
+                }
                 break;
         }
     }
@@ -69,16 +113,16 @@ public class Aim : ISingleton<Aim> {
         Sprite newSprite = null;
         switch (spellType) {
             case SpellType.Laser:
-                newSprite = laserSprite;
+                newSprite = laserProjectileSO.sprite;
                 break;
             case SpellType.Breath:
-                newSprite = breathSprite;
+                newSprite = breathProjectileSO.sprite;
                 break;
             case SpellType.Explosion:
-                newSprite = explosionSprite;
+                newSprite = explosionProjectileSO.sprite;
                 break;
             case SpellType.None:
-                newSprite = shotSprite;
+                newSprite = shotProjectileSO.sprite;
                 break;
         }
         spriteRenderer.sprite = newSprite;
@@ -88,16 +132,20 @@ public class Aim : ISingleton<Aim> {
         Vector3 newScale = Vector3.one;
         switch (spellType) {
             case SpellType.Laser:
-                newScale = Vector3.one * 0.3f;
+                if (isLaserGlobalRange) {
+                    newScale = new Vector3(2f, 0.3f, 0.3f);
+                } else {
+                    newScale = laserProjectileSO.projectile.transform.localScale;
+                }
                 break;
             case SpellType.Breath:
-                newScale = Vector3.one * 0.3f;
+                newScale = breathProjectileSO.projectile.transform.localScale;
                 break;
             case SpellType.Explosion:
-                newScale = Vector3.one * 1.2f;
+                newScale = explosionProjectileSO.projectile.transform.localScale * explosionRangeMultiplier;
                 break;
             case SpellType.None:
-                newScale = Vector3.one * 2f;
+                newScale = shotProjectileSO.projectile.transform.localScale;
                 break;
         }
         transform.localScale = newScale;
@@ -107,18 +155,18 @@ public class Aim : ISingleton<Aim> {
         Vector3 newRotation = Vector3.one;
         switch (spellType) {
             case SpellType.Laser:
-                newRotation = Vector3.one * 0.3f;
+                newRotation = laserProjectileSO.projectile.transform.rotation.eulerAngles;
                 break;
             case SpellType.Breath:
-                newRotation = Vector3.one * 0.3f;
+                newRotation = breathProjectileSO.projectile.transform.rotation.eulerAngles;
                 break;
             case SpellType.Explosion:
-                newRotation = Vector3.one * 1.2f;
+                newRotation = explosionProjectileSO.projectile.transform.rotation.eulerAngles;
                 break;
             case SpellType.None:
-                newRotation = Vector3.one * 2f;
+                newRotation = shotProjectileSO.projectile.transform.rotation.eulerAngles;
                 break;
         }
-        // transform.quaternion.Euler = newRotation;
+        rotationForSprite = newRotation;
     }
 }

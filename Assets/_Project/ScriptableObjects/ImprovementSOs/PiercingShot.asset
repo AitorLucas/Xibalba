@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "Seus tiros b\xE1sicos agora atravessam o primeiro inimigo atingido
     e podem atingir um alvo extra"
   improvementType: 8
-  improvementRarity: 5
+  improvementRarity: 3

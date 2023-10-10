@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
@@ -56,7 +56,7 @@ PrefabInstance:
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 188054811352797119, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
@@ -82,6 +82,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile_Laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693977541708313285, guid: 41bb0e1d2ba42104298277b1d757d1db,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693977541708313285, guid: 41bb0e1d2ba42104298277b1d757d1db,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.9375
       objectReference: {fileID: 0}
     - target: {fileID: 4693977541708313285, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
@@ -167,7 +177,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 1, y: 0.5}
     oldSize: {x: 8.75, y: 0.9375}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 8.75, y: 0.9375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

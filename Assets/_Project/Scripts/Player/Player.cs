@@ -15,17 +15,29 @@ public class Player : ISingleton<Player> {
     [Range(0, .5f)][SerializeField] private float movementSmoothing = .3f;
     [Header("Shoot")]
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private Projectile projectilePreFab;
-    [SerializeField] private Projectile laserPreFab;
-    [SerializeField] private Projectile breathPreFab;
-    [SerializeField] private Projectile explosionPreFab;
+    [SerializeField] private ProjectileSO shotProjectileSO;
+    [SerializeField] private ProjectileSO laserProjectileSO;
+    [SerializeField] private ProjectileSO breathProjectileSO;
+    [SerializeField] private ProjectileSO explosionProjectileSO;
     [Range(5, 60f)][SerializeField] private float shotSpeed = 25f;
-    [Range(0.1f, 3.0f)][SerializeField] private float shotDelay = 0.6f;
 
     public event EventHandler<OnPlayerLifeChangedArgs> OnPlayerLifeChanged;
     public class OnPlayerLifeChangedArgs : EventArgs {
         public float currentLifeNormalized;
     }
+    public event EventHandler<OnExplosionPositionFreeChangedArgs> OnExplosionPositionFreeChanged;
+    public class OnExplosionPositionFreeChangedArgs : EventArgs {
+        public bool isActive;
+    }
+    public event EventHandler<OnLaserGlobalRangeChangedArgs> OnLaserGlobalRangeChanged;
+    public class OnLaserGlobalRangeChangedArgs : EventArgs {
+        public bool isActive;
+    }
+    public event EventHandler<OnExplosionRangeMultiplierChangedArgs> OnExplosionRangeMultiplierChanged;
+    public class OnExplosionRangeMultiplierChangedArgs : EventArgs {
+        public float multiplier;
+    }
+
 
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
@@ -44,11 +56,11 @@ public class Player : ISingleton<Player> {
     private float explosionRangeMultiplier = 1f;
     private int extrasShots = 0;
     private float damagesMultiplier = 1f;
-    private bool isPiercingShots = false;
-    private bool isExplosionWithFireTrails = false;
+    private bool isPiercingShots = false; // TODO: CHANGE TO INT
+    private bool isExplosionWithFireTrails = false; // TODO: NOT IMPLEMENTED
     private bool isLaserWithGlobalRange = false;
     private bool isExplosionPositionFree = false;
-    private bool isShieldActivatable = false; 
+    private bool isShieldActivatable = false; // TODO: NEEDS VISUAL
 
     protected override void Awake() {
         base.Awake();
@@ -71,11 +83,10 @@ public class Player : ISingleton<Player> {
             shotSpeed: shotSpeed * shotSpeedMultiplier,
             movementSmoothing: movementSmoothing, 
             spawnPoints: spawnPoints, 
-            projectilePreFab: projectilePreFab, 
-            laserPreFab: laserPreFab, 
-            breathPreFab: breathPreFab, 
-            explosionPreFab: explosionPreFab, 
-            shotDelay: shotDelay, 
+            shotProjectileSO: shotProjectileSO, 
+            laserProjectileSO: laserProjectileSO, 
+            breathProjectileSO: breathProjectileSO, 
+            explosionProjectileSO: explosionProjectileSO,
             slowEffect: slowEnemyMultiplier, 
             explosionRangeMultiplier: explosionRangeMultiplier, 
             extrasShots: extrasShots, 
@@ -122,9 +133,15 @@ public class Player : ISingleton<Player> {
                 break;
             case ImprovementType.LaserSpellGlobalRange:
                 isLaserWithGlobalRange = true;
+                OnLaserGlobalRangeChanged?.Invoke(this, new OnLaserGlobalRangeChangedArgs {
+                    isActive = isLaserWithGlobalRange
+                });
                 break;
             case ImprovementType.ChoosePositionOnExplosionSpell:
                 isExplosionPositionFree = true;
+                OnExplosionPositionFreeChanged?.Invoke(this, new OnExplosionPositionFreeChangedArgs {
+                    isActive = isExplosionPositionFree
+                });
                 break;
             case ImprovementType.Shield20PerCentMaxLife:
                 isShieldActivatable = true;

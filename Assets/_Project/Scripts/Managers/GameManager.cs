@@ -16,6 +16,12 @@ public class GameManager : ISingleton<GameManager> {
         public int level;
     }
     
+    public EventHandler<OnGamePauseChangedArgs> OnGamePauseChanged; // NEVER USED
+    public class OnGamePauseChangedArgs: EventArgs {
+        public bool isPaused;
+    }
+    
+    private bool isPaused = false;
     private int score = 0;
     private int enemiesAlive = 0;
     private int currentLevel = 1;
@@ -27,7 +33,7 @@ public class GameManager : ISingleton<GameManager> {
     private IEnumerator SpawnEnemies() {
         new WaitForSeconds(1.5f);
 
-        LevelEnemiesSO currentLevelSO = levelEnemiesSOArray[currentLevel - 1];
+        LevelEnemiesSO currentLevelSO = levelEnemiesSOArray[Math.Min(currentLevel - 1, levelEnemiesSOArray.Length - 1)];
 
         foreach (var enemyDictionary in currentLevelSO.enemiesDictionary) {
             Enemy enemyPrefab = enemyDictionary.Key.enemy;
@@ -78,6 +84,22 @@ public class GameManager : ISingleton<GameManager> {
 
     private bool IsGameOver() {
         return Player.Instance.IsDead();
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0;
+        isPaused = true;
+        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = this.isPaused });
+    }
+
+    public void UnpauseGame() {
+        Time.timeScale = 1;
+        isPaused = false;
+        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = this.isPaused });
+    }
+
+    public bool IsPaused() {
+        return isPaused;
     }
 
     public void Restart_DEBUG() {

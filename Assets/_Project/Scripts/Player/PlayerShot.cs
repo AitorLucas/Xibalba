@@ -6,11 +6,10 @@ public class PlayerShot : MonoBehaviour {
 
     // - Constructed
     private Transform[] spawnPoints;
-    private Projectile projectilePreFab;
-    private Projectile laserPreFab;
-    private Projectile breathPreFab;
-    private Projectile explosionPreFab;
-    private float shotDelay;
+    private ProjectileSO shotProjectileSO;
+    private ProjectileSO laserProjectileSO;
+    private ProjectileSO breathProjectileSO;
+    private ProjectileSO explosionProjectileSO;
     private float shotSpeed;
     private float slowEffect;
     private float explosionRangeMultiplier;
@@ -27,13 +26,12 @@ public class PlayerShot : MonoBehaviour {
     private bool canShootBreath = true;
     private bool canShootExplosion = true;
 
-    public void Construct(Transform[] spawnPoints, Projectile projectilePreFab, Projectile laserPreFab, Projectile breathPreFab, Projectile explosionPreFab, float shotDelay, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
+    public void Construct(Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
         this.spawnPoints = spawnPoints;
-        this.projectilePreFab = projectilePreFab;
-        this.laserPreFab = laserPreFab;
-        this.breathPreFab = breathPreFab;
-        this.explosionPreFab = explosionPreFab;
-        this.shotDelay = shotDelay;
+        this.shotProjectileSO = shotProjectileSO;
+        this.laserProjectileSO = laserProjectileSO;
+        this.breathProjectileSO = breathProjectileSO;
+        this.explosionProjectileSO = explosionProjectileSO;
         this.shotSpeed = shotSpeed;
         this.slowEffect = slowEffect;
         this.explosionRangeMultiplier = explosionRangeMultiplier;
@@ -45,19 +43,9 @@ public class PlayerShot : MonoBehaviour {
         this.isExplosionPositionFree = isExplosionPositionFree;
     }
 
-    public void Shot(Vector2 shotDirection, Vector2 playerVelocity) {
+    public void ShotBurst(Vector2 shotDirection, Vector2 playerVelocity) {
         if (canShoot) {
-            foreach (var spawnpoint in spawnPoints) {
-                Projectile projectile = Instantiate(projectilePreFab, spawnpoint.position, Quaternion.Euler(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg));
-                projectile.Construct(lifeTime: 1f, damage: 1f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: isPiercingShots);
-
-                Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();
-
-                projectileRigidBody.velocity = playerVelocity / 3; // Adds a bit of starting speed according to player movement
-                
-                float kMagicNumber = 10f;
-                projectileRigidBody.AddForce(shotDirection * shotSpeed * kMagicNumber, ForceMode2D.Impulse);
-            }
+            StartCoroutine(ShootBurst(shotDirection: shotDirection, playerVelocity: playerVelocity));
 
             if (shotCoroutine != null) {
                 StopCoroutine(shotCoroutine);
@@ -67,15 +55,37 @@ public class PlayerShot : MonoBehaviour {
         }
     }
 
-    private void ShotLaser(Vector2 shotDirection, Vector2 playerVelocity) {
+    private IEnumerator ShootBurst(Vector2 shotDirection, Vector2 playerVelocity) {
+        for (int i = 0; i < 1 + extrasShots; i++) {
+            Shoot(shotDirection: shotDirection, playerVelocity: playerVelocity);
+            yield return new WaitForSeconds(0.1f); // Burst delay
+        }
+    }
+
+    void Shoot(Vector2 shotDirection, Vector2 playerVelocity) {
+        foreach (var spawnpoint in spawnPoints) {
+            Projectile projectile = Instantiate(shotProjectileSO.projectile, spawnpoint.position, Quaternion.Euler(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg));
+            projectile.Construct(lifeTime: 1f, damage: 1f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: isPiercingShots, isSpell: false);
+
+            Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();
+
+            projectileRigidBody.velocity = playerVelocity / 3; // Adds a bit of starting speed according to player movement
+            
+            float kMagicNumber = 10f;
+            projectileRigidBody.AddForce(shotDirection * shotSpeed * kMagicNumber, ForceMode2D.Impulse);
+        }
+    }
+
+    private void ShotLaser(Vector2 shotDirection) {
         if (canShootLaser) {
             foreach (var spawnpoint in spawnPoints) {
-                Projectile projectile = Instantiate(laserPreFab, (Vector2)spawnpoint.position + (shotDirection * 0.6f), Quaternion.Euler(new Vector3(0, 0, -90)));
-                projectile.Construct(lifeTime: 0.25f, damage: 3f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true);
+                Projectile projectile = Instantiate(laserProjectileSO.projectile, (Vector2)spawnpoint.position + (shotDirection * 0.6f), Quaternion.Euler(new Vector3(0, 0, -90)));
+                projectile.Construct(lifeTime: laserProjectileSO.lifeTime, damage: laserProjectileSO.damage * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true, isSpell: true);
                 projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
 
-                Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();
-                projectileRigidBody.velocity = playerVelocity; // Same velocity as player
+                if (isLaserWithGlobalRange) {
+                    projectile.transform.localScale = new Vector3(2f, 0.3f, 0.3f);
+                }
             }
             
             StopCoroutine(shotCoroutine);
@@ -86,15 +96,12 @@ public class PlayerShot : MonoBehaviour {
         }
     }
 
-    private void ShotBreath(Vector2 shotDirection, Vector2 playerVelocity) {
+    private void ShotBreath(Vector2 shotDirection) {
         if (canShootBreath) {
             foreach (var spawnpoint in spawnPoints) {
-                Projectile projectile = Instantiate(breathPreFab, (Vector2)spawnpoint.position + (shotDirection * 0.6f), Quaternion.Euler(new Vector3(0, 0, -90)));
-                projectile.Construct(lifeTime: 0.4f, damage: 3f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true);
+                Projectile projectile = Instantiate(breathProjectileSO.projectile, (Vector2)spawnpoint.position + (shotDirection * 0.6f), Quaternion.Euler(new Vector3(0, 0, -90)));
+                projectile.Construct(lifeTime: breathProjectileSO.lifeTime, damage: breathProjectileSO.damage * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true, isSpell: true);
                 projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
-
-                Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();
-                projectileRigidBody.velocity = playerVelocity; // Same velocity as player
             }
             
             StopCoroutine(shotCoroutine);
@@ -107,14 +114,21 @@ public class PlayerShot : MonoBehaviour {
         }
     }
 
-    private void ShotExplosion(Vector2 shotDirection, Vector2 playerVelocity) {
+    private void ShotExplosion(Vector2 shotDirection) {
         if (canShootExplosion) {
-            foreach (var spawnpoint in spawnPoints) {
-                Projectile projectile = Instantiate(explosionPreFab, spawnpoint.position, Quaternion.identity);
-                projectile.Construct(lifeTime: 0.3f, damage: 4f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true);
+            foreach (var spawnpoint in spawnPoints) { // TODO: THIS DONT MAKE SENSE (REFACTOR TO ONLY ONE SPAWNPOINT)
+                
+                Vector2 spawnPosition = spawnpoint.position;
+                if (isExplosionPositionFree) {
+                    Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
+                    Vector2 mouseInWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
 
-                Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();
-                projectileRigidBody.velocity = playerVelocity; // Same velocity as player
+                    spawnPosition = mouseInWorldPosition;
+                }
+
+                Projectile projectile = Instantiate(explosionProjectileSO.projectile, spawnPosition, Quaternion.identity);
+                projectile.Construct(lifeTime: explosionProjectileSO.lifeTime, damage: explosionProjectileSO.damage * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true, isSpell: true);
+                projectile.transform.localScale *= explosionRangeMultiplier;
             }
             
             StopCoroutine(shotCoroutine);
@@ -126,35 +140,35 @@ public class PlayerShot : MonoBehaviour {
     }
 
     private IEnumerator ShotDelay() {
-        yield return new WaitForSeconds(shotDelay);
+        yield return new WaitForSeconds(shotProjectileSO.shotDelay);
         canShoot = true;
     }
 
     private IEnumerator ShotLaserDelay() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(laserProjectileSO.shotDelay);
         canShootLaser = true;
     }
 
     private IEnumerator ShotBreathDelay() {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(breathProjectileSO.shotDelay);
         canShootBreath = true;
     }
 
     private IEnumerator ShotExplosionDelay() {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(explosionProjectileSO.shotDelay); 
         canShootExplosion = true;
     }
 
-    public void Spell(Vector2 spellDirection, SpellType spellType, Vector2 playerVelocity) {
+    public void Spell(Vector2 spellDirection, SpellType spellType) {
         switch (spellType) {
             case SpellType.Laser:
-                ShotLaser(spellDirection, playerVelocity);
+                ShotLaser(spellDirection);
                 break;
             case SpellType.Breath:
-                ShotBreath(spellDirection, playerVelocity);
+                ShotBreath(spellDirection);
                 break;
             case SpellType.Explosion:
-                ShotExplosion(spellDirection, playerVelocity);
+                ShotExplosion(spellDirection);
                 break;
             case SpellType.None:
                 break;

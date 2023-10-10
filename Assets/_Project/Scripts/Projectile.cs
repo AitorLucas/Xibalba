@@ -17,15 +17,18 @@ public class Projectile : MonoBehaviour {
     private ProjectileFrom wasShootBy;
     private float slowEffect;
     private bool isPiercingShots;
+    private bool isSpell;
 
     private Rigidbody2D rigidbody2D;
+    private Collider2D collider2D;
 
-    public void Construct(float lifeTime, float damage, ProjectileFrom wasShootBy, float slowEffect, bool isPiercingShots) {
+    public void Construct(float lifeTime, float damage, ProjectileFrom wasShootBy, float slowEffect, bool isPiercingShots, bool isSpell) {
         this.lifeTime = lifeTime;
         this.damage = damage;
         this.wasShootBy = wasShootBy;
         this.slowEffect = slowEffect;
         this.isPiercingShots = isPiercingShots;
+        this.isSpell = isSpell;
     }
 
     private void Awake() {
@@ -47,7 +50,9 @@ public class Projectile : MonoBehaviour {
                 if (collider.transform.TryGetComponent(out Player player)) {
                     player.Hurt(damage);
                     if(!isPiercingShots) {
-                        Destroy(gameObject);    
+                        if (!isSpell) {
+                            Destroy(gameObject);
+                        }
                     }
                 }
                 break;
@@ -57,7 +62,9 @@ public class Projectile : MonoBehaviour {
                     enemy.AddKnockback(rigidbody2D.velocity.normalized);
                     enemy.AddSlowEffect(slowEffect);
                     if(!isPiercingShots) {
-                        Destroy(gameObject);    
+                        if (!isSpell) {
+                            Destroy(gameObject);
+                        }  
                     }
                 }
                 break;
@@ -65,8 +72,14 @@ public class Projectile : MonoBehaviour {
 
         if (collider.transform.TryGetComponent(out Obstacle obstacle)) {
             obstacle.AddKnockback(rigidbody2D.velocity.normalized);
-            Destroy(gameObject);
+            if (!isSpell) {
+                Destroy(gameObject);
+            }
         }
+    }
+
+    private void DisableCollision() {
+        collider2D.enabled = false;
     }
 
     public Rigidbody2D GetRigidbody2D() {

@@ -19,10 +19,9 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private float damageCollision  = 0.5f;
     [Header("Shoot")]
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private Projectile projectilePreFab;
+    [SerializeField] private ProjectileSO shotProjectileSO;
     [Range(3, 30f)][SerializeField] private float shotSpeed = 5f;
-    [Range(0.1f, 3.0f)][SerializeField] private float shotDelay = 0.7f;
-    // [SerializeField] private float shotDamage = 1f;
+
     // - Events
     public event EventHandler<OnEnemyDestroyArgs> OnEnemyDestroy;
     public class OnEnemyDestroyArgs : EventArgs {
@@ -44,7 +43,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Start() {
-        enemyController.Construct(followRange: followRange, shotRange: shotRange, movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+        enemyController.Construct(followRange: followRange, shotRange: shotRange, movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, shotSpeed: shotSpeed);
         enemyCollision.Construct(damageCollision: damageCollision);
     }
 

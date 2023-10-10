@@ -105,10 +105,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
+      propertyPath: movementSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: damageCollision
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
       propertyPath: projectilePreFab
       value: 
       objectReference: {fileID: 5553539698169144576, guid: ceba28881d7d28d4bb6c8506b8367d7f,
         type: 3}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
+      propertyPath: shotProjectileSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cf7ae5e7d11710419cd4e7e6ffa11e8,
+        type: 2}
     - target: {fileID: 8321844582275103936, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
       propertyPath: m_Sprite

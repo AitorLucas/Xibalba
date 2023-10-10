@@ -35,15 +35,15 @@ public class EnemyController : MonoBehaviour {
     private Vector2 newDirection;
     private bool chooseDirection = false;
 
-    public void Construct(float followRange, float shotRange, float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+    public void Construct(float followRange, float shotRange, float movementSmoothing, float movementSpeed, Transform[] spawnPoints, ProjectileSO shotProjectileSO, float shotSpeed) {
         this.followRange = followRange;
         this.shotRange = shotRange;
-        this.Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+        this.Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, shotSpeed: shotSpeed);
     }
 
-    public void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, float shotDelay, float shotSpeed) {
+    public void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, ProjectileSO shotProjectileSO, float shotSpeed) {
         enemyMovement.Construct(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed);
-        enemyShot.Construct(spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, shotDelay: shotDelay, shotSpeed: shotSpeed);
+        enemyShot.Construct(spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, shotSpeed: shotSpeed);
     }
 
     private void Awake() {

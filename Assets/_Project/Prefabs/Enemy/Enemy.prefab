@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3854659934329944629}
   - component: {fileID: 6492544434396677287}
   - component: {fileID: 7171468517576743917}
+  - component: {fileID: 1127366929835649450}
   - component: {fileID: 8045704450193286847}
   - component: {fileID: 7819777761057767445}
-  - component: {fileID: 1127366929835649450}
   - component: {fileID: 1439253194704345060}
   - component: {fileID: 1008482105227185839}
   m_Layer: 9
@@ -158,8 +158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4badad12c3a74d94fbf5a6b249366bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovement: {fileID: 0}
-  enemyShot: {fileID: 0}
+--- !u!114 &1127366929835649450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3976064865607017298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 226e30fa2d7316340b13c4f9d291c574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8045704450193286847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,10 +191,8 @@ MonoBehaviour:
   damageCollision: 0.5
   spawnPoints:
   - {fileID: 558963722487084969}
-  projectilePreFab: {fileID: 5553539698169144576, guid: 562081cb8ea0aba4c825d06e2402260c,
-    type: 3}
+  shotProjectileSO: {fileID: 0}
   shotSpeed: 15
-  shotDelay: 0.5
 --- !u!95 &7819777761057767445
 Animator:
   serializedVersion: 5
@@ -206,18 +214,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1127366929835649450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3976064865607017298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226e30fa2d7316340b13c4f9d291c574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &1439253194704345060
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
-      propertyPath: maxLifes
-      value: 100
+      propertyPath: shotSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
@@ -31,6 +31,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9091894858810992137, guid: 05897d4d296977945b0e3c2a51af613f,
         type: 3}
+    - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: explosionPreFab

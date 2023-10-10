@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour {
     private PlayerShot playerShot;
     private Rigidbody2D playerRigidbody;
 
-    public event EventHandler<OnPlayerSpellTypeChangedArgs> OnPlayerSpellTypeChanged;
-    public class OnPlayerSpellTypeChangedArgs : EventArgs {
+    public event EventHandler<OnSpellTypeChangedArgs> OnSpellTypeChanged;
+    public class OnSpellTypeChangedArgs : EventArgs {
         public SpellType spellType;
     }
 
@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour {
     private Vector2 shotVector = Vector2.zero;
     private SpellType currentSpellState = SpellType.None;
 
-    public void Construct(float movementSpeed, float shotDelay, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, Projectile projectilePreFab, Projectile laserPreFab, Projectile breathPreFab, Projectile explosionPreFab, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
-        Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, laserPreFab: laserPreFab, breathPreFab: breathPreFab, explosionPreFab: explosionPreFab, shotDelay: shotDelay, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
+    public void Construct(float movementSpeed, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
+        Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
     }
 
-    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, Projectile projectilePreFab, Projectile laserPreFab, Projectile breathPreFab, Projectile explosionPreFab, float shotDelay, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
+    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
         playerMovement.Construct(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed);
-        playerShot.Construct(spawnPoints: spawnPoints, projectilePreFab: projectilePreFab, laserPreFab: laserPreFab, breathPreFab: breathPreFab, explosionPreFab: explosionPreFab, shotDelay: shotDelay, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
+        playerShot.Construct(spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
     }
 
     private void Awake() {
@@ -66,9 +66,9 @@ public class PlayerController : MonoBehaviour {
 
     private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
         if (currentSpellState == SpellType.None) {
-            playerShot.Shot(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
+            playerShot.ShotBurst(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
         } else {
-            playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState, playerVelocity: playerRigidbody.velocity);
+            playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState);
             currentSpellState = SpellType.None;
             NotifySpellTypeChange();
             StartCoroutine(SpellDelay());
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             currentSpellState = SpellType.Laser;
         }
+        NotifySpellTypeChange();
     }
 
     private void InputManager_OnPlayerExplosionSpellSelectedAction(object sender, EventArgs e) {
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             currentSpellState = SpellType.Explosion;
         }
+        NotifySpellTypeChange();
     }
 
     private void InputManager_OnPlayerDashAction(object sender, EventArgs e) {
@@ -111,6 +113,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void NotifySpellTypeChange() {
-        OnPlayerSpellTypeChanged?.Invoke(this, new OnPlayerSpellTypeChangedArgs { spellType = currentSpellState });
+        OnSpellTypeChanged?.Invoke(this, new OnSpellTypeChangedArgs { spellType = this.currentSpellState });
     }
 }

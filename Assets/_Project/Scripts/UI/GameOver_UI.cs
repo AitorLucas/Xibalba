@@ -14,7 +14,7 @@ public class GameOver_UI : MonoBehaviour {
         GameManager.Instance.OnScoreChanged += GameManager_OnScoreChanged;
 
         menuButton.onClick.AddListener(() => {
-            Time.timeScale = 1;
+            GameManager.Instance.UnpauseGame();
             Loader.Load(Loader.Scene.InitialScene);
         });
     }
@@ -25,7 +25,7 @@ public class GameOver_UI : MonoBehaviour {
 
     private void Player_OnPlayerLifeChanged(object sender, Player.OnPlayerLifeChangedArgs args) {
         if (Player.Instance.IsDead()) {
-            Time.timeScale = 0;
+            GameManager.Instance.PauseGame();
             gameObject.SetActive(true);
         }
     }

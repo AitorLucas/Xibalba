@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "Sua habilidade circular deixa um rastro de chamas por 5 segundos
     que causa 1 ponto de dano por segundo aos inimigos na \xE1rea"
   improvementType: 9
-  improvementRarity: 1
+  improvementRarity: 3

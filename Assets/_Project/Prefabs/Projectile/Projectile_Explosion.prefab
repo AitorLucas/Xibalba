@@ -101,7 +101,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 869539450062403323, guid: 41bb0e1d2ba42104298277b1d757d1db,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7871437479613443021}
+      addedObject: {fileID: 1327129972061406891}
   m_SourcePrefab: {fileID: 100100000, guid: 41bb0e1d2ba42104298277b1d757d1db, type: 3}
 --- !u!1 &4734768505342871016 stripped
 GameObject:
@@ -130,8 +130,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &-7871437479613443021
-BoxCollider2D:
+--- !u!58 &1327129972061406891
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,15 +163,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.46875, y: 0.46875}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
-  m_EdgeRadius: 0
+  m_Radius: 0.24

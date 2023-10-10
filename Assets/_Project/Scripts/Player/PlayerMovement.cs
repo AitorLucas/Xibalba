@@ -40,7 +40,9 @@ public class PlayerMovement : MonoBehaviour {
         animator.SetBool("IsMoving", true);
     }
 
-    public void Dash(Vector2 movement) {
+    public void Dash(Vector2 movement) { // TODO: ADD THIS FEATURE
+        // TODO: Add dash animation 
+        Debug.Log("Dash");
         rigidbody.AddForce(movement * 20f, ForceMode2D.Impulse);
     }
 

@@ -28,6 +28,6 @@ public enum ImprovementType {
 
 public enum ImprovementRarity: int {
     Bronze = 15,
-    Silver = 5,
-    Gold = 1,
+    Silver = 6,
+    Gold = 3,
 }

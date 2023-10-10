@@ -61,7 +61,12 @@ public class Improvements_UI : MonoBehaviour {
 
         isHidden = !isHidden;
         
-        Time.timeScale = isHidden ? 1 : 0;
+        if (isHidden) {
+            GameManager.Instance.UnpauseGame();
+        } else {
+            GameManager.Instance.PauseGame();
+        }
+
         gameObject.SetActive(!isHidden);
     }
 }

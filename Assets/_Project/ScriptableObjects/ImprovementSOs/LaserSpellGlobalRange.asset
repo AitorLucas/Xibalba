@@ -15,4 +15,4 @@ MonoBehaviour:
   title: LaserSpellGlobalRange
   description: Sua habilidade de linha tem alcance global
   improvementType: 10
-  improvementRarity: 1
+  improvementRarity: 3
