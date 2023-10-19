@@ -36,8 +36,10 @@ public class Aim : ISingleton<Aim> {
 
     private void Update() {
         if (GameManager.Instance.IsPaused()) {
+            gameObject.SetActive(false);
             return;
         }
+        gameObject.SetActive(true);
 
         Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
         Vector2 mouseInWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));

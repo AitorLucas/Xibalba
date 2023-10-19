@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class MusicManager : ISingleton<MusicManager> {
 
     private AudioSource audioSource;
@@ -8,9 +9,10 @@ public class MusicManager : ISingleton<MusicManager> {
 
     protected override void Awake() {
         base.Awake();
-        // audioSource = GetComponent<AudioSource>();
-        // volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .3f);
-        // audioSource.volume = volume;
+        
+        audioSource = GetComponent<AudioSource>();
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .3f);
+        audioSource.volume = volume;
     }
 
     public void ChangeVolume() {

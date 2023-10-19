@@ -225,6 +225,10 @@ public class Player : ISingleton<Player> {
         return playerController;
     }
 
+    public void Move(Vector2 movement) {
+        playerController.Move(movement);
+    }
+
     public void ToggleGodMode_DEBUG() {
         isGodModeEnable = !isGodModeEnable;
     }

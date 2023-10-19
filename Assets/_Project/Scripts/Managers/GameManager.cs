@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : ISingleton<GameManager> {
 
@@ -28,6 +29,22 @@ public class GameManager : ISingleton<GameManager> {
 
     private void Start() {
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(InitialAnimation());
+    }
+
+    private IEnumerator InitialAnimation() {
+        // PauseGame();
+
+        float startTime = Time.unscaledTime;
+
+        Player player = Player.Instance;
+        while ((Vector2)player.transform.position != Vector2.zero && (Time.unscaledTime - startTime) < 3f) {
+            Debug.Log("Aqui");
+            player.Move(Vector2.down);
+            // yield return null;
+        }
+        yield return null;
+        // UnpauseGame();
     }
 
     private IEnumerator SpawnEnemies() {

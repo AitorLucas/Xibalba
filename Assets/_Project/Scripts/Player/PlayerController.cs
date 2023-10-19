@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         movementVector = InputManager.Instance.GetMovementVectorNormalized();
-        isMoving = (movementVector != Vector2.zero);
 
         Vector2 mousePosition = InputManager.Instance.GetShotDirectionVector();
         Vector2 playerPosition = transform.position;
@@ -57,6 +56,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        isMoving = (playerRigidbody.velocity != Vector2.zero) || (movementVector != Vector2.zero);
+
         if (isMoving && !isShootingSpell) {
             playerMovement.Move(movementVector * Time.fixedDeltaTime);
         } else {
@@ -114,5 +115,9 @@ public class PlayerController : MonoBehaviour {
 
     private void NotifySpellTypeChange() {
         OnSpellTypeChanged?.Invoke(this, new OnSpellTypeChangedArgs { spellType = this.currentSpellState });
+    }
+
+    public void Move(Vector2 movement) {
+        playerMovement.Move(movement);
     }
 }
