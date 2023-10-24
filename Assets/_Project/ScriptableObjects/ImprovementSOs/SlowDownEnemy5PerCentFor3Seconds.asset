@@ -17,3 +17,4 @@ MonoBehaviour:
     por 3 segundos"
   improvementType: 3
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: f59c18600d398bb459412083429ae1cc, type: 3}

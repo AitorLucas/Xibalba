@@ -16,3 +16,4 @@ MonoBehaviour:
   description: "Seus pontos de vida m\xE1xima aumentam em 10%"
   improvementType: 1
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: 3f045f2a34190964299ce1896bb72683, type: 3}

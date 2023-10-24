@@ -33,18 +33,18 @@ public class GameManager : ISingleton<GameManager> {
     }
 
     private IEnumerator InitialAnimation() {
-        // PauseGame();
+        // // PauseGame();
 
-        float startTime = Time.unscaledTime;
+        // float startTime = Time.unscaledTime;
 
-        Player player = Player.Instance;
-        while ((Vector2)player.transform.position != Vector2.zero && (Time.unscaledTime - startTime) < 3f) {
-            Debug.Log("Aqui");
-            player.Move(Vector2.down);
-            // yield return null;
-        }
+        // Player player = Player.Instance;
+        // while ((Vector2)player.transform.position != Vector2.zero && (Time.unscaledTime - startTime) < 3f) {
+        //     Debug.Log("Aqui");
+        //     player.Move(Vector2.down);
+        //     // yield return null;
+        // }
         yield return null;
-        // UnpauseGame();
+        // // UnpauseGame();
     }
 
     private IEnumerator SpawnEnemies() {
@@ -60,7 +60,7 @@ public class GameManager : ISingleton<GameManager> {
                 int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
                 Transform spawnPosition = spawnPoints[randomIndex];
                 
-                Enemy enemy = Instantiate<Enemy>(enemyPrefab, spawnPosition.position, Quaternion.identity);
+                Enemy enemy = Instantiate(enemyPrefab, spawnPosition.position, Quaternion.identity);
                 enemy.OnEnemyDestroy += Enemy_OnEnemyDestroy;
                 enemiesAlive += 1;
             }    

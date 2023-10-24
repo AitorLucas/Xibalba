@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Sua velocidade de movimento aumenta em 5%
   improvementType: 0
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: 2bebc8365def0ba4389d662cda0c69a0, type: 3}

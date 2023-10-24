@@ -16,3 +16,4 @@ MonoBehaviour:
   description: "Voc\xEA recupera 5% da sua vida m\xE1xima ao matar um inimigo"
   improvementType: 4
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: d161c083635312e498d9aeeaf1d8687b, type: 3}

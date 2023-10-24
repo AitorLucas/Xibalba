@@ -64,7 +64,7 @@ public class PlayerShot : MonoBehaviour {
 
     void Shoot(Vector2 shotDirection, Vector2 playerVelocity) {
         foreach (var spawnpoint in spawnPoints) {
-            Projectile projectile = Instantiate(shotProjectileSO.projectile, spawnpoint.position, Quaternion.Euler(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg));
+            Projectile projectile = Instantiate(shotProjectileSO.projectile, spawnpoint.position, Quaternion.Euler(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg) * Quaternion.Euler(shotProjectileSO.projectile.transform.rotation.eulerAngles));
             projectile.Construct(lifeTime: 1f, damage: 1f * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: isPiercingShots, isSpell: false);
 
             Rigidbody2D projectileRigidBody = projectile.GetRigidbody2D();

@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+
         if (currentSpellState == SpellType.None) {
             playerShot.ShotBurst(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
         } else {
@@ -77,6 +81,10 @@ public class PlayerController : MonoBehaviour {
     }
        
     private void InputManager_OnPlayerBreathSpellSelectedAction(object sender, EventArgs e) {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+
         if (currentSpellState == SpellType.Breath) {
             currentSpellState = SpellType.None;
         } else {
@@ -86,6 +94,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerLaserSpellSelectedAction(object sender, EventArgs e) {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+
         if (currentSpellState == SpellType.Laser) {
             currentSpellState = SpellType.None;
         } else {
@@ -95,6 +107,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerExplosionSpellSelectedAction(object sender, EventArgs e) {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+
         if (currentSpellState == SpellType.Explosion) {
             currentSpellState = SpellType.None;
         } else {
@@ -104,6 +120,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerDashAction(object sender, EventArgs e) {
+        if (GameManager.Instance.IsPaused()) {
+            return;
+        }
+        
         playerMovement.Dash(movementVector);
     }
 

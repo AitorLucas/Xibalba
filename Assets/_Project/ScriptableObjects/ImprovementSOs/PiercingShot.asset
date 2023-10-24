@@ -17,3 +17,4 @@ MonoBehaviour:
     e podem atingir um alvo extra"
   improvementType: 8
   improvementRarity: 3
+  sprite: {fileID: 21300000, guid: 5a15f34eba7cc1f4d9ef3f15f737e2ee, type: 3}

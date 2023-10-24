@@ -17,3 +17,4 @@ MonoBehaviour:
     fogo equivalente a 20% da sua vida que reflete o dano sofrido aos inimigos"
   improvementType: 12
   improvementRarity: 3
+  sprite: {fileID: 21300000, guid: 9b31da6f3b761ab41984af27aa401657, type: 3}

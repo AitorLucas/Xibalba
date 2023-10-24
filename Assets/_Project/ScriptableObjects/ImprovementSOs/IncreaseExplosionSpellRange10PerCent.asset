@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Aumenta o range da habilidade circular em 10%
   improvementType: 5
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: a19932642507dd347b8ff450d928fdd0, type: 3}

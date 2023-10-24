@@ -17,3 +17,4 @@ MonoBehaviour:
     que causa 1 ponto de dano por segundo aos inimigos na \xE1rea"
   improvementType: 9
   improvementRarity: 3
+  sprite: {fileID: 21300000, guid: f67813d79acd2a3408f2d34866ff625c, type: 3}

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: "Sua cad\xEAncia de tiro aumenta em 10%"
   improvementType: 2
   improvementRarity: 15
+  sprite: {fileID: 21300000, guid: 7e72b796a919f824e97440d683bf09bc, type: 3}

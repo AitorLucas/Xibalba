@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 public class Improvements_UI : MonoBehaviour {
 
-    // [SerializeField] private TextMeshProUGUI improvement1Title;
-    // [SerializeField] private TextMeshProUGUI improvement2Title;
-    // [SerializeField] private TextMeshProUGUI improvement3Title;
     [SerializeField] private TextMeshProUGUI improvement1Description;
     [SerializeField] private TextMeshProUGUI improvement2Description;
     [SerializeField] private TextMeshProUGUI improvement3Description;
     [SerializeField] private Button improvement1Button;
     [SerializeField] private Button improvement2Button;
     [SerializeField] private Button improvement3Button;
+    [SerializeField] private Image improvement1Image;
+    [SerializeField] private Image improvement2Image;
+    [SerializeField] private Image improvement3Image;
 
     public EventHandler<OnImprovementSelectedArgs> OnImprovementSelected;
     public class OnImprovementSelectedArgs: EventArgs {
@@ -49,9 +49,13 @@ public class Improvements_UI : MonoBehaviour {
     }
 
     private void UpdateScreenData() {
-        improvement1Description.text = improvementSOsList[0].name;
-        improvement2Description.text = improvementSOsList[1].name;
-        improvement3Description.text = improvementSOsList[2].name;
+        improvement1Description.text = improvementSOsList[0].description;
+        improvement2Description.text = improvementSOsList[1].description;
+        improvement3Description.text = improvementSOsList[2].description;
+
+        improvement1Image.sprite = improvementSOsList[0].sprite;
+        improvement2Image.sprite = improvementSOsList[1].sprite;
+        improvement3Image.sprite = improvementSOsList[2].sprite; 
     }
 
     private void ToggleVisibility() {

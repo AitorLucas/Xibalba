@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Sua habilidade de linha tem alcance global
   improvementType: 10
   improvementRarity: 3
+  sprite: {fileID: 21300000, guid: 2bcc6ea48b61c0544a97e13b81d373b7, type: 3}

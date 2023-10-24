@@ -7,6 +7,7 @@ public class ImprovementSO : ScriptableObject {
     public string description;
     public ImprovementType improvementType;
     public ImprovementRarity improvementRarity;
+    public Sprite sprite;
 
 }
 
