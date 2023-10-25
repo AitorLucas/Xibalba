@@ -23,6 +23,7 @@ public class GameManager : ISingleton<GameManager> {
     }
     
     private bool isPaused = false;
+    private bool isTimePaused = false;
     private int score = 0;
     private int enemiesAlive = 0;
     private int currentLevel = 1;
@@ -30,6 +31,8 @@ public class GameManager : ISingleton<GameManager> {
     private void Start() {
         StartCoroutine(SpawnEnemies());
         StartCoroutine(InitialAnimation());
+
+        InputManager.Instance.OnGeneralPauseGameAction += InputManager_OnGeneralPauseGameAction;
     }
 
     private IEnumerator InitialAnimation() {
@@ -83,6 +86,20 @@ public class GameManager : ISingleton<GameManager> {
         }
     }
 
+    private void InputManager_OnGeneralPauseGameAction(object sender, EventArgs args) {
+        if (IsGameOver()) {
+            return;
+        }
+
+        isPaused = !isPaused;
+
+        if (isPaused) {
+            PauseGame();
+        } else {
+            UnpauseGame();
+        }
+    }
+
     private void AddPointsToScore(int points) {
         score += points;
         OnScoreChanged?.Invoke(this, new OnScoreChangedArgs { score = this.score });
@@ -99,24 +116,32 @@ public class GameManager : ISingleton<GameManager> {
         ImprovementManager.Instance.StartImprovementsSelection();
     }
 
-    private bool IsGameOver() {
+    public bool IsGameOver() {
         return Player.Instance.IsDead();
     }
 
-    public void PauseGame() {
+    public void PauseGameTime() {
         Time.timeScale = 0;
-        isPaused = true;
-        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = this.isPaused });
+        isTimePaused = true;
+    }
+
+    public void UnpauseGameTime() {
+        Time.timeScale = 1;
+        isTimePaused = false;
+    }
+
+    public void PauseGame() {
+        PauseGameTime();
+        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = true });
     }
 
     public void UnpauseGame() {
-        Time.timeScale = 1;
-        isPaused = false;
-        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = this.isPaused });
+        UnpauseGameTime();
+        OnGamePauseChanged?.Invoke(this, new OnGamePauseChangedArgs { isPaused = false });
     }
 
-    public bool IsPaused() {
-        return isPaused;
+    public bool IsTimePaused() {
+        return isTimePaused;
     }
 
     public void Restart_DEBUG() {

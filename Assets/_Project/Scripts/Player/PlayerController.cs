@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             return;
         }
 
@@ -75,13 +75,13 @@ public class PlayerController : MonoBehaviour {
         } else {
             playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState);
             currentSpellState = SpellType.None;
-            NotifySpellTypeChange();
             StartCoroutine(SpellDelay());
         }
+        NotifySpellTypeChange();
     }
        
     private void InputManager_OnPlayerBreathSpellSelectedAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             return;
         }
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerLaserSpellSelectedAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             return;
         }
 
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerExplosionSpellSelectedAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             return;
         }
 
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void InputManager_OnPlayerDashAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             return;
         }
         
@@ -139,5 +139,9 @@ public class PlayerController : MonoBehaviour {
 
     public void Move(Vector2 movement) {
         playerMovement.Move(movement);
+    }
+
+    public PlayerShot GetPlayerShot() {
+        return playerShot;
     }
 }

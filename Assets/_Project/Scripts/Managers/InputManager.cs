@@ -11,12 +11,14 @@ public class InputManager : ISingleton<InputManager> {
     public event EventHandler OnPlayerExplosionSpellSelectedAction;
     public event EventHandler OnPlayerDashAction;
     public event EventHandler OnDebugTogglePaneAction;
+    public event EventHandler OnGeneralPauseGameAction;
 
     protected override void Awake() {
         base.Awake();
         gameInputActions = new GameInputActions();
         gameInputActions.Player.Enable();
         gameInputActions.Debug.Enable();
+        gameInputActions.General.Enable();
     }
 
     private void Start() {
@@ -26,6 +28,7 @@ public class InputManager : ISingleton<InputManager> {
         gameInputActions.Player.ExplosionSpell.performed += PlayerExplosionSpell_Performed;
         gameInputActions.Player.Dash.performed += PlayerDash_Performed;
         gameInputActions.Debug.TogglePane.performed += DebugTogglePane_Performed;
+        gameInputActions.General.PauseGame.performed += GeneralPauseGame_Performed;
     }
 
     private void OnDestroy() {
@@ -35,6 +38,7 @@ public class InputManager : ISingleton<InputManager> {
         gameInputActions.Player.ExplosionSpell.performed -= PlayerExplosionSpell_Performed;
         gameInputActions.Player.Dash.performed -= PlayerDash_Performed;
         gameInputActions.Debug.TogglePane.performed -= DebugTogglePane_Performed;
+        gameInputActions.General.PauseGame.performed -= GeneralPauseGame_Performed;
 
         gameInputActions.Dispose();
     }
@@ -63,6 +67,10 @@ public class InputManager : ISingleton<InputManager> {
         OnDebugTogglePaneAction?.Invoke(this, EventArgs.Empty);
     }
 
+    private void GeneralPauseGame_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnGeneralPauseGameAction?.Invoke(this, EventArgs.Empty);
+    }
+
     public Vector2 GetMovementVectorNormalized() {
         Vector2 inputVector = gameInputActions.Player.Movement.ReadValue<Vector2>();
         return inputVector;
@@ -72,5 +80,4 @@ public class InputManager : ISingleton<InputManager> {
         Vector2 shotVector = gameInputActions.Player.ShotDirection.ReadValue<Vector2>();
         return shotVector;
     }
-
 }

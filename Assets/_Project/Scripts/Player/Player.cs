@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Reflection.Emit;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using static ImprovementManager;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class Player : ISingleton<Player> {
+public class Player : ISingleton<Player>, ISoundPlayer {
 
     [Range(50, 300f)][SerializeField] private float maxLifes = 100;
     [Range(0, 2f)][SerializeField] private float invecibilityDelay = 0.8f;
@@ -25,6 +26,8 @@ public class Player : ISingleton<Player> {
     public class OnPlayerLifeChangedArgs : EventArgs {
         public float currentLifeNormalized;
     }
+    public event EventHandler<EventArgs> OnPlayerDeath;
+    public event EventHandler<EventArgs> OnPlayerHurt;
     public event EventHandler<OnExplosionPositionFreeChangedArgs> OnExplosionPositionFreeChanged;
     public class OnExplosionPositionFreeChangedArgs : EventArgs {
         public bool isActive;
@@ -97,26 +100,31 @@ public class Player : ISingleton<Player> {
             isExplosionPositionFree: isExplosionPositionFree);
     }
 
+    // ISoundPlayer
+    // public void PlaySound(AudioClip audioClip, float volume) {
+    //     Debug.Log("SIA <AS");
+    // }
+
     private void ImprovementManager_OnImprovementSelected(object sender, OnImprovementSelectedArgs args) {
         switch (args.improvementSO.improvementType) {
-            case ImprovementType.MovementVelocityUp5PerCent:
+            case ImprovementType.MovementVelocityUp:
                 movementVelocityMultiplier = 1 + (args.count * 0.05f);
                 break;
-            case ImprovementType.MaxLifeUp10PerCent:
+            case ImprovementType.MaxLifeUp:
                 maxLifesMultiplier = 1 + (args.count * 0.1f);
                 maxLifes *= maxLifesMultiplier;
                 lifes *= maxLifesMultiplier;
                 break;
-            case ImprovementType.FireRateUp10PerCent:
+            case ImprovementType.FireRateUp:
                 shotSpeedMultiplier = 1 + (args.count * 0.1f);
                 break;
-            case ImprovementType.SlowDownEnemy5PerCentFor3Seconds:
+            case ImprovementType.SlowDownEnemyOnHit:
                 slowEnemyMultiplier = 1 + (args.count * 0.05f);
                 break;
-            case ImprovementType.Heal5PerCentMaxLifeOnKill:
+            case ImprovementType.HealOnKill:
                 recoverLifeMultiplierOnKill = 1 + (args.count * 0.05f);
                 break;
-            case ImprovementType.IncreaseExplosionSpellRange10PerCent:
+            case ImprovementType.IncreaseExplosionSpellRange:
                 explosionRangeMultiplier = 1 + (args.count * 0.1f);
                 break;
             case ImprovementType.ExtraShot:
@@ -143,7 +151,7 @@ public class Player : ISingleton<Player> {
                     isActive = isExplosionPositionFree
                 });
                 break;
-            case ImprovementType.Shield20PerCentMaxLife:
+            case ImprovementType.Shield:
                 isShieldActivatable = true;
                 break;
         }
@@ -175,24 +183,31 @@ public class Player : ISingleton<Player> {
             return;
         }
 
-        if (!isInvecible) {
-            if (isShieldActivatable && shieldLife > 0) {
-                shieldLife -= amount;
-                
-                if (shieldLife < 0) {;
-                    amount = -shieldLife;
-                } else {
-                    return;
-                }
-            }
-
-            lifes -= amount;
-            lifes = Mathf.Max(0, lifes);
-
-            StartCoroutine(InvecibilityDelay());
+        if (isInvecible) {
+            return;
         }
 
+        if (isShieldActivatable && shieldLife > 0) {
+            shieldLife -= amount;
+            
+            if (shieldLife < 0) {;
+                amount = -shieldLife;
+            } else {
+                return;
+            }
+        }
+
+        lifes -= amount;
+        lifes = Mathf.Max(0, lifes);
+
+        StartCoroutine(InvecibilityDelay());
         NotifyLifeChange();
+                
+        if (IsDead()) {
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        } else {
+            OnPlayerHurt?.Invoke(this, EventArgs.Empty);
+        } 
     }
 
     public void Heal(float amount) {

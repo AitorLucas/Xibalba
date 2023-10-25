@@ -1,0 +1,306 @@
+fileFormatVersion: 2
+guid: 0885e9829d8d43146896bcb2d72a2011
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 78
+        width: 72
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360acd26798d1ac4eb7c45fc59ebc5da
+      internalID: 299022851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 79
+        width: 69
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dd376047fb13df4e9fc3a2deb889e25
+      internalID: -2030289926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_7
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 80
+        width: 70
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b8afbbcd4d55440a4a96bcd723eaf2
+      internalID: 674010208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_18
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 7
+        width: 32
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c88a15dc54d1de49ad37f8170194551
+      internalID: 162387659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_19
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 8
+        width: 34
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe0611f9509605a4d96470acaf36c435
+      internalID: -800791251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1 copiar_22
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 7
+        width: 33
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c8e05fcd37845340ba4dbe2289abe47
+      internalID: -1263768178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      COBRAS1.1 copiar_0: 299022851
+      COBRAS1.1 copiar_1: -2036434610
+      COBRAS1.1 copiar_10: -2086104433
+      COBRAS1.1 copiar_11: -1782429955
+      COBRAS1.1 copiar_12: -2122563720
+      COBRAS1.1 copiar_13: 705344705
+      COBRAS1.1 copiar_14: 900978741
+      COBRAS1.1 copiar_15: 550304983
+      COBRAS1.1 copiar_16: 897442782
+      COBRAS1.1 copiar_17: 1198748248
+      COBRAS1.1 copiar_18: 162387659
+      COBRAS1.1 copiar_19: -800791251
+      COBRAS1.1 copiar_2: -2030289926
+      COBRAS1.1 copiar_20: 1099238742
+      COBRAS1.1 copiar_21: 1436744559
+      COBRAS1.1 copiar_22: -1263768178
+      COBRAS1.1 copiar_23: 292774731
+      COBRAS1.1 copiar_24: -1881510337
+      COBRAS1.1 copiar_25: -1454673330
+      COBRAS1.1 copiar_26: -2071912247
+      COBRAS1.1 copiar_27: 1303991725
+      COBRAS1.1 copiar_28: -2014291204
+      COBRAS1.1 copiar_29: -1924655643
+      COBRAS1.1 copiar_3: -612786875
+      COBRAS1.1 copiar_30: -31885684
+      COBRAS1.1 copiar_31: 2133529302
+      COBRAS1.1 copiar_32: 568849095
+      COBRAS1.1 copiar_33: 1312189631
+      COBRAS1.1 copiar_34: 1644643046
+      COBRAS1.1 copiar_35: 30714932
+      COBRAS1.1 copiar_36: -754693592
+      COBRAS1.1 copiar_37: 224817117
+      COBRAS1.1 copiar_38: 291483830
+      COBRAS1.1 copiar_39: 1902854566
+      COBRAS1.1 copiar_4: 585290702
+      COBRAS1.1 copiar_5: 285979542
+      COBRAS1.1 copiar_6: -327582725
+      COBRAS1.1 copiar_7: 674010208
+      COBRAS1.1 copiar_8: -227340587
+      COBRAS1.1 copiar_9: 2109755764
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

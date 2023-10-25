@@ -11,7 +11,7 @@ public class MusicManager : ISingleton<MusicManager> {
         base.Awake();
         
         audioSource = GetComponent<AudioSource>();
-        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .3f);
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .1f);
         audioSource.volume = volume;
     }
 

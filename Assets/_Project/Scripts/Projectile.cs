@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour {
     private Rigidbody2D rigidbody2D;
     private Collider2D collider2D;
 
+    public event EventHandler OnProjectileHit;
+
     public void Construct(float lifeTime, float damage, ProjectileFrom wasShootBy, float slowEffect, bool isPiercingShots, bool isSpell) {
         this.lifeTime = lifeTime;
         this.damage = damage;
@@ -33,6 +35,12 @@ public class Projectile : MonoBehaviour {
 
     private void Awake() {
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        SoundManager.Instance.RegisterNewProjectile(this);
+    }
+
+    private void OnDestroy() {
+        SoundManager.Instance.UnregisterProjectile(this);
     }
 
     private void Start() {
@@ -74,6 +82,7 @@ public class Projectile : MonoBehaviour {
             obstacle.AddKnockback(rigidbody2D.velocity.normalized);
             if (!isSpell) {
                 Destroy(gameObject);
+                OnProjectileHit?.Invoke(this, EventArgs.Empty);
             }
         }
     }

@@ -12,19 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f55727e10203745b7f634e75f72b4e, type: 3}
   m_Name: AudioClipsSO
   m_EditorClassIdentifier: 
-  footSteps: []
-  playerDeath: []
-  shotFire: []
-  shotHit: []
-  castFireBreath: []
-  castLaser: []
+  footSteps:
+  - {fileID: 8300000, guid: 74fb0bf68831ec14e8bbc1d6ab1dfba5, type: 3}
+  - {fileID: 8300000, guid: eaf994496ccc5594e8080f3b417dc6e4, type: 3}
+  - {fileID: 8300000, guid: d9a50401294cf994db997588f91d42e3, type: 3}
+  - {fileID: 8300000, guid: d6ebde4a3ada7fb4cb40b4aee74b36d5, type: 3}
+  playerDeath:
+  - {fileID: 8300000, guid: d45a457e0e8810a4393f8f69afbcaeba, type: 3}
+  playerHurt:
+  - {fileID: 8300000, guid: 883133fffbfc825499eb9c4b2ed56a0d, type: 3}
+  shotFire:
+  - {fileID: 8300000, guid: 3054ada6e2d73834786ea39b2eddbb15, type: 3}
+  shotHit:
+  - {fileID: 8300000, guid: 987059469494d224b995db032b94a8c1, type: 3}
+  castFireBreath:
+  - {fileID: 8300000, guid: 3c209915cd5aea3498b6ebc123ebd5ae, type: 3}
+  castLaser:
+  - {fileID: 8300000, guid: 8d530c3462669b54ab13d44065f77721, type: 3}
   castExplosion: []
   batMoving: []
   batAtack: []
   batDeath: []
+  batHurt: []
   snakeSpeak: []
   snakeAtack: []
-  snakeDeath: []
-  clickIn: []
-  newLevel: []
-  newImprovement: []
+  snakeDeath:
+  - {fileID: 8300000, guid: 6d79e17c1a9ae7349b3fdbb3ebc112e0, type: 3}
+  snakeHurt:
+  - {fileID: 8300000, guid: 0f3932e6fe5456c46bd18228dd7f6564, type: 3}
+  - {fileID: 8300000, guid: 3f30eb1a83e8c4a4c9c790392c348d91, type: 3}
+  clickIn:
+  - {fileID: 8300000, guid: d762bfc2ed4970a409733d59fe687fa4, type: 3}
+  newLevel:
+  - {fileID: 8300000, guid: d762bfc2ed4970a409733d59fe687fa4, type: 3}
+  newImprovement:
+  - {fileID: 8300000, guid: d762bfc2ed4970a409733d59fe687fa4, type: 3}
+  changeSpell:
+  - {fileID: 8300000, guid: d762bfc2ed4970a409733d59fe687fa4, type: 3}

@@ -35,7 +35,7 @@ public class Aim : ISingleton<Aim> {
     }
 
     private void Update() {
-        if (GameManager.Instance.IsPaused()) {
+        if (GameManager.Instance.IsTimePaused()) {
             GetComponent<SpriteRenderer>().enabled = false;
             return;
         }

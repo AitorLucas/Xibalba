@@ -26,6 +26,11 @@ public class PlayerShot : MonoBehaviour {
     private bool canShootBreath = true;
     private bool canShootExplosion = true;
 
+    public event EventHandler<EventArgs> OnPlayerShot;
+    public event EventHandler<EventArgs> OnPlayerCastBreath;
+    public event EventHandler<EventArgs> OnPlayerCastLaser;
+    public event EventHandler<EventArgs> OnPlayerCastExplosion;
+
     public void Construct(Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
         this.spawnPoints = spawnPoints;
         this.shotProjectileSO = shotProjectileSO;
@@ -74,6 +79,7 @@ public class PlayerShot : MonoBehaviour {
             float kMagicNumber = 10f;
             projectileRigidBody.AddForce(shotDirection * shotSpeed * kMagicNumber, ForceMode2D.Impulse);
         }
+        OnPlayerShot?.Invoke(this, EventArgs.Empty);
     }
 
     private void ShotLaser(Vector2 shotDirection) {
@@ -88,6 +94,7 @@ public class PlayerShot : MonoBehaviour {
                 }
             }
             
+            OnPlayerCastLaser?.Invoke(this, EventArgs.Empty);
             StopCoroutine(shotCoroutine);
             canShoot = false;
             canShootLaser = false;
@@ -104,6 +111,7 @@ public class PlayerShot : MonoBehaviour {
                 projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
             }
             
+            OnPlayerCastBreath?.Invoke(this, EventArgs.Empty);
             StopCoroutine(shotCoroutine);
             canShoot = false;
             canShootBreath = false;
@@ -131,6 +139,7 @@ public class PlayerShot : MonoBehaviour {
                 projectile.transform.localScale *= explosionRangeMultiplier;
             }
             
+            OnPlayerCastExplosion?.Invoke(this, EventArgs.Empty);
             StopCoroutine(shotCoroutine);
             canShoot = false;
             canShootExplosion = false;

@@ -12,23 +12,23 @@ public class ImprovementSO : ScriptableObject {
 }
 
 public enum ImprovementType {
-    MovementVelocityUp5PerCent,
-    MaxLifeUp10PerCent,
-    FireRateUp10PerCent,
-    SlowDownEnemy5PerCentFor3Seconds,
-    Heal5PerCentMaxLifeOnKill,
-    IncreaseExplosionSpellRange10PerCent,
+    MovementVelocityUp,
+    MaxLifeUp,
+    FireRateUp,
+    SlowDownEnemyOnHit,
+    HealOnKill,
+    IncreaseExplosionSpellRange,
     ExtraShot,
     ExtraDamage,
     PiercingShot,
     ExplosionSpellFireTrail,
     LaserSpellGlobalRange,
     ChoosePositionOnExplosionSpell,
-    Shield20PerCentMaxLife,
+    Shield,
 }
 
 public enum ImprovementRarity: int {
-    Bronze = 15,
-    Silver = 6,
-    Gold = 3,
+    Bronze = 5,
+    Silver = 3,
+    Gold = 1,
 }
