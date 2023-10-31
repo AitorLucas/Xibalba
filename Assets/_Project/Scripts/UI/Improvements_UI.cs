@@ -15,6 +15,7 @@ public class Improvements_UI : MonoBehaviour {
     [SerializeField] private Image improvement1Image;
     [SerializeField] private Image improvement2Image;
     [SerializeField] private Image improvement3Image;
+    [SerializeField] private Button selectionButton;
 
     public EventHandler<OnImprovementSelectedArgs> OnImprovementSelected;
     public class OnImprovementSelectedArgs: EventArgs {
@@ -23,20 +24,50 @@ public class Improvements_UI : MonoBehaviour {
 
     private List<ImprovementSO> improvementSOsList;
     private bool isHidden = true;
+    private int selectedImprovementIndex;
+    private int kUnselectedIndex = -1;
+    
+    private void Awake() {
+        selectedImprovementIndex = kUnselectedIndex;
+    }
 
     private void Start() {
         gameObject.SetActive(!isHidden);
 
         improvement1Button.onClick.AddListener(() => {
-            OnImprovementSelected?.Invoke(this, new OnImprovementSelectedArgs { improvementSO = improvementSOsList[0] });
-            ToggleVisibility();
+            if (selectedImprovementIndex == 0) {
+                return;
+            }
+            int oldIndex = selectedImprovementIndex;
+            selectedImprovementIndex = 0;
+            UpdateImprovementButtons(oldIndex: oldIndex);
         });
         improvement2Button.onClick.AddListener(() => {
-            OnImprovementSelected?.Invoke(this, new OnImprovementSelectedArgs { improvementSO = improvementSOsList[1] });
-            ToggleVisibility();
+            if (selectedImprovementIndex == 1) {
+                return;
+            }
+            int oldIndex = selectedImprovementIndex;
+            selectedImprovementIndex = 1;
+            UpdateImprovementButtons(oldIndex: oldIndex);
         });
         improvement3Button.onClick.AddListener(() => {
-            OnImprovementSelected?.Invoke(this, new OnImprovementSelectedArgs { improvementSO = improvementSOsList[2] });
+            if (selectedImprovementIndex == 2) {
+                return;
+            }
+            int oldIndex = selectedImprovementIndex;
+            selectedImprovementIndex = 2;
+            UpdateImprovementButtons(oldIndex: oldIndex);
+        });
+
+        selectionButton.onClick.AddListener(() => {
+            Debug.Log("THIS:" + selectedImprovementIndex.ToString());
+            if (selectedImprovementIndex == kUnselectedIndex) {
+                return;
+            }
+            OnImprovementSelected?.Invoke(this, new OnImprovementSelectedArgs {
+                improvementSO = improvementSOsList[selectedImprovementIndex]
+            });
+            selectedImprovementIndex = kUnselectedIndex;
             ToggleVisibility();
         });
     }
@@ -55,7 +86,17 @@ public class Improvements_UI : MonoBehaviour {
 
         improvement1Image.sprite = improvementSOsList[0].sprite;
         improvement2Image.sprite = improvementSOsList[1].sprite;
-        improvement3Image.sprite = improvementSOsList[2].sprite; 
+        improvement3Image.sprite = improvementSOsList[2].sprite;
+    }
+
+    private void UpdateImprovementButtons(int oldIndex) {
+        if (selectedImprovementIndex == 0) {
+            improvement1Button.Select();
+        } else if (selectedImprovementIndex == 1) {
+            improvement2Button.Select();
+        } else if (selectedImprovementIndex == 2) {
+            improvement3Button.Select();
+        }
     }
 
     private void ToggleVisibility() {

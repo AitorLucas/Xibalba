@@ -30,6 +30,7 @@ public class SoundManager : ISingleton<SoundManager> {
         playerShot.OnPlayerCastExplosion += PlayerShot_OnPlayerCastExplosion;
     }
 
+
     private void Update() {
         movingTimer -= Time.deltaTime;
         if (movingTimer < 0f) {

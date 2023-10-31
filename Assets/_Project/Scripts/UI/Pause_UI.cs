@@ -15,6 +15,7 @@ public class Pause_UI : MonoBehaviour {
 
         resumeButton.onClick.AddListener(() => {
             GameManager.Instance.UnpauseGameTime();
+            gameObject.SetActive(false);
         });
 
         instructionsButton.onClick.AddListener(() => {
