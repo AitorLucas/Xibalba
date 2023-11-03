@@ -15,5 +15,5 @@ MonoBehaviour:
   title: ExtraDamage
   description: Seus tiros causam 1 de dano extra
   improvementType: 7
-  improvementRarity: 6
+  improvementRarity: 3
   sprite: {fileID: 21300000, guid: 3befd0dcf4b22244db2ef5291e7a5503, type: 3}

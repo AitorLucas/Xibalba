@@ -15,5 +15,5 @@ MonoBehaviour:
   title: ChoosePositionOnExplosionSpell
   description: "Voc\xEA agora pode escolher onde lan\xE7ar sua habilidade circular"
   improvementType: 11
-  improvementRarity: 3
+  improvementRarity: 1
   sprite: {fileID: 21300000, guid: f67813d79acd2a3408f2d34866ff625c, type: 3}

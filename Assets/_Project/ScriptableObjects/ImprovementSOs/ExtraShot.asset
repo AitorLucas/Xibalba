@@ -15,5 +15,5 @@ MonoBehaviour:
   title: ExtraShot
   description: "Seus ataques b\xE1sicos lan\xE7am um tiro extra"
   improvementType: 6
-  improvementRarity: 6
+  improvementRarity: 3
   sprite: {fileID: 21300000, guid: affbd0116f7ae4c4996d801f64dca988, type: 3}

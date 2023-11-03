@@ -60,7 +60,6 @@ public class Improvements_UI : MonoBehaviour {
         });
 
         selectionButton.onClick.AddListener(() => {
-            Debug.Log("THIS:" + selectedImprovementIndex.ToString());
             if (selectedImprovementIndex == kUnselectedIndex) {
                 return;
             }

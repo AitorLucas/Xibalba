@@ -85,8 +85,15 @@ public class PlayerShot : MonoBehaviour {
     private void ShotLaser(Vector2 shotDirection) {
         if (canShootLaser) {
             foreach (var spawnpoint in spawnPoints) {
-                Projectile projectile = Instantiate(laserProjectileSO.projectile, (Vector2)spawnpoint.position + (shotDirection * 0.6f), Quaternion.Euler(new Vector3(0, 0, -90)));
-                projectile.Construct(lifeTime: laserProjectileSO.lifeTime, damage: laserProjectileSO.damage * damagesMultiplier, wasShootBy: ProjectileFrom.Player, slowEffect: slowEffect, isPiercingShots: true, isSpell: true);
+                Projectile projectile = Instantiate(laserProjectileSO.projectile,
+                                                    (Vector2)spawnpoint.position + (shotDirection * 0.6f),
+                                                    Quaternion.Euler(new Vector3(0, 0, -90)));
+                projectile.Construct(lifeTime: laserProjectileSO.lifeTime,
+                                    damage: laserProjectileSO.damage * damagesMultiplier,
+                                    wasShootBy: ProjectileFrom.Player,
+                                    slowEffect: slowEffect,
+                                    isPiercingShots: true,
+                                    isSpell: true);
                 projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
 
                 if (isLaserWithGlobalRange) {

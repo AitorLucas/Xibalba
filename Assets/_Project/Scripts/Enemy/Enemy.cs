@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyCollision))]
 [RequireComponent(typeof(EnemyController))]
 [RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(EnemyCollision))]
 public class Enemy : MonoBehaviour {
 
     [SerializeField] private float maxLifes = 3f;
