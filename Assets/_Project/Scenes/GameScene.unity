@@ -14032,6 +14032,7 @@ MonoBehaviour:
   resumeButton: {fileID: 1641279505}
   instructionsButton: {fileID: 927297284}
   menuButton: {fileID: 2097189352}
+  howToPlay_UI: {fileID: 1871926587}
 --- !u!114 &1943571369
 MonoBehaviour:
   m_ObjectHideFlags: 0
