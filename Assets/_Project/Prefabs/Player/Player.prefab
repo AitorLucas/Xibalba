@@ -260,7 +260,7 @@ MonoBehaviour:
   movementSmoothing: 0.3
   spawnPoints:
   - {fileID: 6874621107590414199}
-  shotProjectileSO: {fileID: 11400000, guid: 1535a824054620b4cb2bb698bb2a15c7, type: 2}
+  shotProjectileSO: {fileID: 11400000, guid: 528cc46a1fa96024cbf490155fa08964, type: 2}
   laserProjectileSO: {fileID: 11400000, guid: cd9293870325f3e4c88b3e77a23b9806, type: 2}
   breathProjectileSO: {fileID: 11400000, guid: 6dc9c61bc50b8f4409a26add97cc4f73, type: 2}
   explosionProjectileSO: {fileID: 11400000, guid: de7305d39bb8b1448acac7fa13319127,
