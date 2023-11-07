@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d41c89575f179d44aaeb71865297833b
+guid: 1470485835becff4ebe363aa66ab1db4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -126,10 +126,10 @@ TextureImporter:
       name: "personagem.Maia(tr\xE1s)_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 98
-        width: 79
-        height: 160
+        x: 2
+        y: 102
+        width: 70
+        height: 149
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d091cf63c1b4314aa861036c832067b
-      internalID: 155953520
+      spriteID: 2d91dcc9557da954eab1d960645f76c3
+      internalID: 715218175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "personagem.Maia(tr\xE1s)_7"
+      name: "personagem.Maia(tr\xE1s)_1"
       rect:
         serializedVersion: 2
-        x: 231
-        y: 98
-        width: 79
-        height: 160
+        x: 121
+        y: 102
+        width: 67
+        height: 151
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97e35f9dde9a90e468114ea05b84db53
-      internalID: -1441210909
+      spriteID: 70dff57ecbbf47a4ba851a2cf4cee64f
+      internalID: -1673283681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "personagem.Maia(tr\xE1s)_11"
+      name: "personagem.Maia(tr\xE1s)_2"
       rect:
         serializedVersion: 2
-        x: 117
-        y: 98
-        width: 78
-        height: 160
+        x: 238
+        y: 100
+        width: 71
+        height: 152
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f14d051dde61e041bd3c20916db5aba
-      internalID: 840259251
+      spriteID: d5fbc55060270334483e10debb6fe808
+      internalID: 668408048
       vertices: []
       indices: 
       edges: []
@@ -196,56 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "personagem.Maia(tr\xE1s)_0": 155953520
-      "personagem.Maia(tr\xE1s)_1": 1141515684
-      "personagem.Maia(tr\xE1s)_10": -806218103
-      "personagem.Maia(tr\xE1s)_11": 840259251
-      "personagem.Maia(tr\xE1s)_12": -601930997
-      "personagem.Maia(tr\xE1s)_13": 911983239
-      "personagem.Maia(tr\xE1s)_14": -376040855
-      "personagem.Maia(tr\xE1s)_15": 1560078882
-      "personagem.Maia(tr\xE1s)_16": 778791033
-      "personagem.Maia(tr\xE1s)_17": -1383469152
-      "personagem.Maia(tr\xE1s)_18": -1948868278
-      "personagem.Maia(tr\xE1s)_19": -616129451
-      "personagem.Maia(tr\xE1s)_2": -1380082494
-      "personagem.Maia(tr\xE1s)_20": 1772969396
-      "personagem.Maia(tr\xE1s)_21": -1228249728
-      "personagem.Maia(tr\xE1s)_22": 1704383166
-      "personagem.Maia(tr\xE1s)_23": -744165031
-      "personagem.Maia(tr\xE1s)_24": -551900018
-      "personagem.Maia(tr\xE1s)_25": 559798880
-      "personagem.Maia(tr\xE1s)_26": 1065850063
-      "personagem.Maia(tr\xE1s)_27": 194641634
-      "personagem.Maia(tr\xE1s)_28": 652685945
-      "personagem.Maia(tr\xE1s)_29": -1460423773
-      "personagem.Maia(tr\xE1s)_3": -1763386338
-      "personagem.Maia(tr\xE1s)_30": -924414348
-      "personagem.Maia(tr\xE1s)_31": 1238639866
-      "personagem.Maia(tr\xE1s)_32": 422038078
-      "personagem.Maia(tr\xE1s)_33": -1112066225
-      "personagem.Maia(tr\xE1s)_34": 1138714002
-      "personagem.Maia(tr\xE1s)_35": 2061565222
-      "personagem.Maia(tr\xE1s)_36": 1139643721
-      "personagem.Maia(tr\xE1s)_37": -849065464
-      "personagem.Maia(tr\xE1s)_38": -1453343798
-      "personagem.Maia(tr\xE1s)_39": 835312018
-      "personagem.Maia(tr\xE1s)_4": -998143352
-      "personagem.Maia(tr\xE1s)_40": 1472761059
-      "personagem.Maia(tr\xE1s)_41": 668339838
-      "personagem.Maia(tr\xE1s)_42": 2000944717
-      "personagem.Maia(tr\xE1s)_43": 585835554
-      "personagem.Maia(tr\xE1s)_44": 889290322
-      "personagem.Maia(tr\xE1s)_45": 1206800320
-      "personagem.Maia(tr\xE1s)_46": 885925433
-      "personagem.Maia(tr\xE1s)_47": -1389111107
-      "personagem.Maia(tr\xE1s)_48": -576420425
-      "personagem.Maia(tr\xE1s)_49": -412328625
-      "personagem.Maia(tr\xE1s)_5": 1664428088
-      "personagem.Maia(tr\xE1s)_6": -897150770
-      "personagem.Maia(tr\xE1s)_7": -1441210909
-      "personagem.Maia(tr\xE1s)_8": -724945909
-      "personagem.Maia(tr\xE1s)_9": -1125331419
+      "personagem.Maia(tr\xE1s)_0": 715218175
+      "personagem.Maia(tr\xE1s)_1": -1673283681
+      "personagem.Maia(tr\xE1s)_2": 668408048
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

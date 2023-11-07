@@ -16,3 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1904b73cb357baf4cbc45c43af58b391, type: 2}
   - {fileID: 11400000, guid: 86d0e523a6b9937419370b97c780be2b, type: 2}
   _values: 0400000002000000
+  enemiesCount: 0

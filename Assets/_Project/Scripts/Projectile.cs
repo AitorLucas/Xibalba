@@ -16,20 +16,21 @@ public class Projectile : MonoBehaviour {
     private float damage;
     private ProjectileFrom wasShootBy;
     private float slowEffect;
-    private bool isPiercingShots;
+    private int piercingShots;
     private bool isSpell;
 
     private Rigidbody2D rigidbody2D;
     private Collider2D collider2D;
 
     public event EventHandler OnProjectileHit;
+    private int piercingCount = 0;
 
-    public void Construct(float lifeTime, float damage, ProjectileFrom wasShootBy, float slowEffect, bool isPiercingShots, bool isSpell) {
+    public void Construct(float lifeTime, float damage, ProjectileFrom wasShootBy, float slowEffect, int piercingShots, bool isSpell) {
         this.lifeTime = lifeTime;
         this.damage = damage;
         this.wasShootBy = wasShootBy;
         this.slowEffect = slowEffect;
-        this.isPiercingShots = isPiercingShots;
+        this.piercingShots = piercingShots;
         this.isSpell = isSpell;
     }
 
@@ -57,11 +58,11 @@ public class Projectile : MonoBehaviour {
             case (ProjectileFrom.Enemy):
                 if (collider.transform.TryGetComponent(out Player player)) {
                     player.Hurt(damage);
-                    if(!isPiercingShots) {
-                        if (!isSpell) {
+                    // if(!isPiercingShots) {
+                        // if (!isSpell) {
                             Destroy(gameObject);
-                        }
-                    }
+                        // }
+                    // }
                 }
                 break;
             case (ProjectileFrom.Player):
@@ -69,10 +70,14 @@ public class Projectile : MonoBehaviour {
                     enemy.Hurt(damage);
                     enemy.AddKnockback(rigidbody2D.velocity.normalized);
                     enemy.AddSlowEffect(slowEffect);
-                    if(!isPiercingShots) {
+
+                    if (piercingCount < piercingShots) {
+                        piercingCount++;
+                    } else {
                         if (!isSpell) {
                             Destroy(gameObject);
-                        }  
+                            OnProjectileHit?.Invoke(this, EventArgs.Empty);
+                        }
                     }
                 }
                 break;

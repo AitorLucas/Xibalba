@@ -25,8 +25,6 @@ public class EnemyController : MonoBehaviour {
     private EnemyShot enemyShot;
     private Rigidbody2D enemyRigidbody;
 
-    private Player player;
-
     private Path path;
     private int currentWaypoint = 0;
     private bool reachEndOfPath = false;
@@ -54,10 +52,8 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Start() {
-        player = Player.Instance;
-
         InvokeRepeating("UpdatePath", 0f, 0.5f); 
-    }
+    }   
 
     private void Update() {
         if (currentState != EnemyState.Die) {
@@ -105,7 +101,7 @@ public class EnemyController : MonoBehaviour {
                 break;
             case (EnemyState.Shoot):
                 enemyMovement.Stop();
-                Vector2 shotDirection = (player.transform.position - transform.position).normalized;
+                Vector2 shotDirection = (Player.Instance.transform.position - transform.position).normalized;
                 enemyShot.Shot(shotDirection * Time.fixedDeltaTime, enemyRigidbody.velocity);
                 break;
             case (EnemyState.Die):
@@ -116,7 +112,7 @@ public class EnemyController : MonoBehaviour {
 
     private void UpdatePath() {
         if (seeker.IsDone()) {
-            seeker.StartPath(enemyRigidbody.position, player.transform.position, OnPathComplete);
+            seeker.StartPath(enemyRigidbody.position, Player.Instance.transform.position, OnPathComplete);
         }
     }  
 
@@ -128,7 +124,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private bool IsPlayerInRange(float range) {
-        return Vector3.Distance(transform.position, player.transform.position) <= range;
+        return Vector3.Distance(transform.position, Player.Instance.transform.position) <= range;
     }
 
     private IEnumerator ChooseDirection() {

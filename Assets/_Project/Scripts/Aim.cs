@@ -8,7 +8,6 @@ public class Aim : ISingleton<Aim> {
     [SerializeField] private ProjectileSO explosionProjectileSO;
     [SerializeField] private ProjectileSO breathProjectileSO;
 
-
     private SpriteRenderer spriteRenderer;
 
     private SpellType currentSpellType = SpellType.None;
@@ -32,6 +31,14 @@ public class Aim : ISingleton<Aim> {
         player.OnExplosionRangeMultiplierChanged += Player_OnExplosionRangeMultiplierChanged;
 
         UpdateAim(SpellType.None);
+    }
+
+    private void OnDestroy() {
+        Player player = Player.Instance;
+        player.GetPlayerController().OnSpellTypeChanged -= PlayerController_OnSpellTypeChanged;
+        player.OnExplosionPositionFreeChanged -= Player_OnExplosionPositionFreeChanged;
+        player.OnLaserGlobalRangeChanged -= Player_OnLaserGlobalRangeChanged;
+        player.OnExplosionRangeMultiplierChanged -= Player_OnExplosionRangeMultiplierChanged;
     }
 
     private void Update() {

@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour {
     private Vector2 shotVector = Vector2.zero;
     private SpellType currentSpellState = SpellType.None;
 
-    public void Construct(float movementSpeed, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
-        Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
+    public void Construct(float movementSpeed, float shotSpeed, float movementSmoothing, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, int piercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
+        Cascate(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed, spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, piercingShots: piercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
     }
 
-    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, bool isPiercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
+    private void Cascate(float movementSmoothing, float movementSpeed, Transform[] spawnPoints, ProjectileSO shotProjectileSO, ProjectileSO laserProjectileSO, ProjectileSO breathProjectileSO, ProjectileSO explosionProjectileSO, float shotSpeed, float slowEffect, float explosionRangeMultiplier, float extrasShots, float damagesMultiplier, int piercingShots, bool isExplosionWithFireTrails, bool isLaserWithGlobalRange, bool isExplosionPositionFree) {
         playerMovement.Construct(movementSmoothing: movementSmoothing, movementSpeed: movementSpeed);
-        playerShot.Construct(spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, isPiercingShots: isPiercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
+        playerShot.Construct(spawnPoints: spawnPoints, shotProjectileSO: shotProjectileSO, laserProjectileSO: laserProjectileSO, breathProjectileSO: breathProjectileSO, explosionProjectileSO: explosionProjectileSO, shotSpeed: shotSpeed, slowEffect: slowEffect, explosionRangeMultiplier: explosionRangeMultiplier, extrasShots: extrasShots, damagesMultiplier: damagesMultiplier, piercingShots: piercingShots, isExplosionWithFireTrails: isExplosionWithFireTrails, isLaserWithGlobalRange: isLaserWithGlobalRange, isExplosionPositionFree: isExplosionPositionFree);
     }
 
     private void Awake() {
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Start() {
-        InputManager.Instance.OnPlayerSpellCastAction += InputManager_OnPlayerSpellCastAction;
+        // InputManager.Instance.OnPlayerSpellCastAction += InputManager_OnPlayerSpellCastAction;
         InputManager.Instance.OnPlayerBreathSpellSelectedAction += InputManager_OnPlayerBreathSpellSelectedAction;
         InputManager.Instance.OnPlayerLaserSpellSelectedAction += InputManager_OnPlayerLaserSpellSelectedAction;
         InputManager.Instance.OnPlayerExplosionSpellSelectedAction += InputManager_OnPlayerExplosionSpellSelectedAction;
@@ -53,6 +53,25 @@ public class PlayerController : MonoBehaviour {
         Vector2 mouseInWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         mouseInWorldPosition = mouseInWorldPosition - playerPosition;
         shotVector = mouseInWorldPosition.normalized;
+
+        if (InputManager.Instance.GetMousePressed()) {
+            if (GameManager.Instance.IsTimePaused()) {
+                return;
+            }
+
+            if (currentSpellState == SpellType.None) {
+                playerShot.ShotBurst(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
+            } else {     
+                StartCoroutine(SpellDelay());
+                playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState);
+            }
+
+            SpellType oldSpellState = currentSpellState;
+            currentSpellState = SpellType.None;
+            if (oldSpellState != currentSpellState) {
+                NotifySpellTypeChange();
+            }
+        }
     }
 
     private void FixedUpdate() {
@@ -65,20 +84,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
-        if (GameManager.Instance.IsTimePaused()) {
-            return;
-        }
+    // private void InputManager_OnPlayerSpellCastAction(object sender, EventArgs e) {
+    //     if (GameManager.Instance.IsTimePaused()) {
+    //         return;
+    //     }
 
-        if (currentSpellState == SpellType.None) {
-            playerShot.ShotBurst(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
-        } else {
-            playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState);
-            currentSpellState = SpellType.None;
-            StartCoroutine(SpellDelay());
-        }
-        NotifySpellTypeChange();
-    }
+    //     if (currentSpellState == SpellType.None) {
+    //         playerShot.ShotBurst(shotVector * Time.fixedDeltaTime, playerRigidbody.velocity);
+    //     } else {     
+    //         StartCoroutine(SpellDelay());
+    //         playerShot.Spell(spellDirection: shotVector, spellType: currentSpellState);
+    //     }
+    //     currentSpellState = SpellType.None;
+    //     NotifySpellTypeChange();
+    // }
        
     private void InputManager_OnPlayerBreathSpellSelectedAction(object sender, EventArgs e) {
         if (GameManager.Instance.IsTimePaused()) {

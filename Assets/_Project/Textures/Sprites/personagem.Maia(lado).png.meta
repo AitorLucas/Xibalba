@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c17f67188ec93546930f3d51239242a
+guid: fceeb12e50ef19d42bb4553fb42f199c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: personagem.Maia(lado)_11
+      name: personagem.Maia(lado) 1_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 93
-        width: 84
-        height: 190
+        x: 18
+        y: 99
+        width: 82
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 633118c3768f8294ca981cb1735ba9d0
-      internalID: -871414878
+      spriteID: cc33547197a67b94892b63f9e9b39196
+      internalID: -1397979717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: personagem.Maia(lado)_13
+      name: personagem.Maia(lado) 1_1
       rect:
         serializedVersion: 2
-        x: 101
-        y: 93
-        width: 92
-        height: 190
+        x: 110
+        y: 98
+        width: 83
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b56dc55c5e5c66c4f87723aa9456aa3e
-      internalID: 1198051792
+      spriteID: 41f600f6662ae734d9859724ecfd014c
+      internalID: -1504912011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: personagem.Maia(lado)_15
+      name: personagem.Maia(lado) 1_2
       rect:
         serializedVersion: 2
-        x: 197
-        y: 93
-        width: 90
-        height: 190
+        x: 204
+        y: 98
+        width: 83
+        height: 183
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96bc1c61025e0634a8f403e5b2620af1
-      internalID: -2101901164
+      spriteID: 5de27072571ba294eaf342c933a8ec9c
+      internalID: 628516353
       vertices: []
       indices: 
       edges: []
@@ -196,44 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      personagem.Maia(lado)_0: 1316552711
-      personagem.Maia(lado)_1: 354831157
-      personagem.Maia(lado)_10: -512360833
-      personagem.Maia(lado)_11: -871414878
-      personagem.Maia(lado)_12: 2030516300
-      personagem.Maia(lado)_13: 1198051792
-      personagem.Maia(lado)_14: 4279665
-      personagem.Maia(lado)_15: -2101901164
-      personagem.Maia(lado)_16: 1654199664
-      personagem.Maia(lado)_17: 1688261241
-      personagem.Maia(lado)_18: 1565813245
-      personagem.Maia(lado)_19: 934220172
-      personagem.Maia(lado)_2: 957700131
-      personagem.Maia(lado)_20: -913218816
-      personagem.Maia(lado)_21: -920983413
-      personagem.Maia(lado)_22: -1225117650
-      personagem.Maia(lado)_23: -1596618255
-      personagem.Maia(lado)_24: 1681573019
-      personagem.Maia(lado)_25: -1431271402
-      personagem.Maia(lado)_26: -1274049527
-      personagem.Maia(lado)_27: -744001310
-      personagem.Maia(lado)_28: 1997683047
-      personagem.Maia(lado)_29: -1579654041
-      personagem.Maia(lado)_3: 698605069
-      personagem.Maia(lado)_30: -409102016
-      personagem.Maia(lado)_31: 369063359
-      personagem.Maia(lado)_32: -709354572
-      personagem.Maia(lado)_33: 696005221
-      personagem.Maia(lado)_34: -281105053
-      personagem.Maia(lado)_35: -543790821
-      personagem.Maia(lado)_36: -1403285370
-      personagem.Maia(lado)_37: 1579736836
-      personagem.Maia(lado)_4: -299016658
-      personagem.Maia(lado)_5: 515719341
-      personagem.Maia(lado)_6: -1736872616
-      personagem.Maia(lado)_7: -824961300
-      personagem.Maia(lado)_8: -1359274274
-      personagem.Maia(lado)_9: -2045433605
+      personagem.Maia(lado) 1_0: -1397979717
+      personagem.Maia(lado) 1_1: -1504912011
+      personagem.Maia(lado) 1_2: 628516353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8aab9df98675bf54e846eb7155072c96
+guid: 5db33b4c70df2354cb80b927a79a27de
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -123,64 +123,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: personagem.Maia(frente)_0
+      name: personagem.Maia(frente) 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 93
-        width: 103
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3ecc26c188c15349a705fb475f642c0
-      internalID: -303307599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: personagem.Maia(frente)_1
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 93
-        width: 96
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d860ce3e120aec54c8933545dcf91938
-      internalID: -859677223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: personagem.Maia(frente)_2
-      rect:
-        serializedVersion: 2
-        x: 194
-        y: 93
+        x: 1
+        y: 96
         width: 97
-        height: 200
+        height: 198
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cfb261176040f4448c2eac3fdbd955b
-      internalID: -373496969
+      spriteID: 6ca8fa0389e1bfc4da5ff25fed2248df
+      internalID: 256863177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: personagem.Maia(frente) 1_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 95
+        width: 94
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072a2b25843852b45a9ef00e7a42fb87
+      internalID: -1251601602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: personagem.Maia(frente) 1_2
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 94
+        width: 96
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46072db89ad6ecf4ca575710a9744c0a
+      internalID: -1345978069
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      personagem.Maia(frente)_0: -303307599
-      personagem.Maia(frente)_1: -859677223
-      personagem.Maia(frente)_2: -373496969
+      personagem.Maia(frente) 1_0: 256863177
+      personagem.Maia(frente) 1_1: -1251601602
+      personagem.Maia(frente) 1_2: -1345978069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -7,6 +7,7 @@ public class Pause_UI : MonoBehaviour {
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button instructionsButton;
     [SerializeField] private Button menuButton;
+    [SerializeField] private HowToPlay_UI howToPlay_UI;
 
     private void Start() {
         gameObject.SetActive(false);
@@ -19,8 +20,7 @@ public class Pause_UI : MonoBehaviour {
         });
 
         instructionsButton.onClick.AddListener(() => {
-            // GameManager.Instance.UnpauseGame();
-            // Loader.Load(Loader.Scene.InitialScene);
+            howToPlay_UI.Show();
         });
 
         menuButton.onClick.AddListener(() => {
@@ -32,10 +32,8 @@ public class Pause_UI : MonoBehaviour {
     private void GameManager_OnGamePauseChanged(object sender, GameManager.OnGamePauseChangedArgs args) {
         if (args.isPaused) {
             gameObject.SetActive(true);
-            // GetComponent<SpriteRenderer>().enabled = true;
         } else {
             gameObject.SetActive(false);
-            // GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

@@ -25,6 +25,7 @@ public enum ImprovementType {
     LaserSpellGlobalRange,
     ChoosePositionOnExplosionSpell,
     Shield,
+    Ascension,
 }
 
 public enum ImprovementRarity: int {

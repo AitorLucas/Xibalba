@@ -21,7 +21,7 @@ public class EnemyShot : MonoBehaviour {
         if (canShoot) {
             foreach (var spawnpoint in spawnPoints) {
                 Projectile projectile = Instantiate(shotProjectileSO.projectile, spawnpoint.position, Quaternion.identity);
-                projectile.Construct(lifeTime: shotProjectileSO.lifeTime, damage: shotProjectileSO.damage, wasShootBy: ProjectileFrom.Enemy, slowEffect: 0, isPiercingShots: false, isSpell: false);
+                projectile.Construct(lifeTime: shotProjectileSO.lifeTime, damage: shotProjectileSO.damage, wasShootBy: ProjectileFrom.Enemy, slowEffect: 0, piercingShots: 0, isSpell: false);
                 projectile.transform.Rotate(new Vector3 (0, 0, Mathf.Atan2(-shotDirection.x, shotDirection.y)) * Mathf.Rad2Deg);
 
                 Rigidbody2D projectileRigidBody = projectile.GetComponent<Rigidbody2D>();

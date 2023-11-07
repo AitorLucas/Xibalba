@@ -8,6 +8,7 @@ public class Debug_UI : MonoBehaviour {
     [SerializeField] private Button respawnButton;
     [SerializeField] private Button godModeButton;
     [SerializeField] private Button improvementsButton;
+    [SerializeField] private Button lastImprovementsButton;
 
     private bool isHidden = true;
 
@@ -24,6 +25,9 @@ public class Debug_UI : MonoBehaviour {
         });
         improvementsButton.onClick.AddListener(() => {
             GameManager.Instance.StartImprovementsSelection_DEBUG();
+        });
+        lastImprovementsButton.onClick.AddListener(() => {
+            GameManager.Instance.StartLastImprovementSelection_DEBUG();
         });
     }
 

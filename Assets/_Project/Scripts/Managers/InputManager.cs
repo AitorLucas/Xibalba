@@ -22,7 +22,7 @@ public class InputManager : ISingleton<InputManager> {
     }
 
     private void Start() {
-        gameInputActions.Player.CastSpell.performed += PlayerCastSpell_Performed;
+        // gameInputActions.Player.CastSpell.performed += PlayerCastSpell_Performed;
         gameInputActions.Player.BreathSpell.performed += PlayerBreathSpell_Performed;
         gameInputActions.Player.LaserSpell.performed += PlayerLaserSpell_Performed;
         gameInputActions.Player.ExplosionSpell.performed += PlayerExplosionSpell_Performed;
@@ -32,7 +32,7 @@ public class InputManager : ISingleton<InputManager> {
     }
 
     private void OnDestroy() {
-        gameInputActions.Player.CastSpell.performed -= PlayerCastSpell_Performed;
+        // gameInputActions.Player.CastSpell.performed -= PlayerCastSpell_Performed;
         gameInputActions.Player.BreathSpell.performed -= PlayerBreathSpell_Performed;
         gameInputActions.Player.LaserSpell.performed -= PlayerLaserSpell_Performed;
         gameInputActions.Player.ExplosionSpell.performed -= PlayerExplosionSpell_Performed;
@@ -43,9 +43,9 @@ public class InputManager : ISingleton<InputManager> {
         gameInputActions.Dispose();
     }
 
-    private void PlayerCastSpell_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-        OnPlayerSpellCastAction?.Invoke(this, EventArgs.Empty);
-    }
+    // private void PlayerCastSpell_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    //     OnPlayerSpellCastAction?.Invoke(this, EventArgs.Empty);
+    // }
 
     private void PlayerBreathSpell_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnPlayerBreathSpellSelectedAction?.Invoke(this, EventArgs.Empty);
@@ -69,6 +69,10 @@ public class InputManager : ISingleton<InputManager> {
 
     private void GeneralPauseGame_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnGeneralPauseGameAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool GetMousePressed() {
+        return gameInputActions.Player.CastSpell.IsPressed();
     }
 
     public Vector2 GetMovementVectorNormalized() {

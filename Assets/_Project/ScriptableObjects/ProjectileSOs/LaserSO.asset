@@ -17,7 +17,7 @@ MonoBehaviour:
   isSpell: 1
   animationDuration: 0.26
   lifeTime: 0.26
-  damage: 3
+  damage: 5
   shotDelay: 6
   sprite: {fileID: -261455768, guid: acd3122ca158d2141ae3fc3f62db00e0, type: 3}
   objectName: Laser

@@ -31,4 +31,12 @@ public class LevelEnemiesSO : ScriptableObject, ISerializationCallbackReceiver {
         foreach (var kvp in enemiesDictionary)
             GUILayout.Label("Key: " + kvp.Key + " value: " + kvp.Value);
     }
+
+    public int GetEnemiesCount() {
+        int enemiesCount = 0;
+        foreach (var kvp in enemiesDictionary) {
+            enemiesCount += kvp.Value;
+        }
+        return enemiesCount;
+    }
 }

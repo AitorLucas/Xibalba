@@ -17,7 +17,7 @@ MonoBehaviour:
   isSpell: 1
   animationDuration: 0.1
   lifeTime: 0.3
-  damage: 4
+  damage: 7
   shotDelay: 7
   sprite: {fileID: -1331289994, guid: e89ad7df03392ca4c938257f54afbed6, type: 3}
   objectName: Explosion

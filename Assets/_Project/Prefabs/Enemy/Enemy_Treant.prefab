@@ -90,6 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f2692763365d4914cb0f90fba9397102, type: 2}
     - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
+      propertyPath: maxLifes
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
+        type: 3}
       propertyPath: shotRange
       value: 2
       objectReference: {fileID: 0}
@@ -111,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}
       propertyPath: damageCollision
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8045704450193286847, guid: 546ba7eac2b61b84492b6428f834315d,
         type: 3}

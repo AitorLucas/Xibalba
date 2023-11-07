@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: COBRAS1.1_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 211
+        width: 35
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b0ee107d72d844d85ab49ca32b88ef
+      internalID: -346317317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 215
+        width: 33
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e43458166c8c854497bcdda61f22b3d
+      internalID: -490138319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_5
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 214
+        width: 37
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd3095c07e8c1a438a52d4ce3a73e8c
+      internalID: -1729235506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_28
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 153
+        width: 70
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 564187bd084550d479430b7c7998e7f4
+      internalID: -748720411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_30
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 154
+        width: 72
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 199a78b5ad5a1c840b2f3bfff779a150
+      internalID: 22149776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_31
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 153
+        width: 70
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75a0864572695494fa8e637505d0dd3f
+      internalID: 72554375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_38
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 78
+        width: 69
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47d6edd1c57b4c49b2b1c3f3ed0ab22
+      internalID: -1558694880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_40
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 80
+        width: 70
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ffd6524ff5c9f478edb8e7181065e8
+      internalID: -1691861549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_45
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 80
+        width: 69
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023f825ccaff0074d85a2e7caf4b4a42
+      internalID: -1776826713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_56
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 5
+        width: 33
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c564c25fa6466534bad9eeaabcf4451a
+      internalID: 1784189482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_57
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 7
+        width: 36
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335b31b74c478ab47a2713bb47ef5b40
+      internalID: 514005540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: COBRAS1.1_60
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 6
+        width: 33
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7204673b6a0c48348befb245f00b6f08
+      internalID: -1355293310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +384,85 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      COBRAS1.1_0: -346317317
+      COBRAS1.1_1: 1071331820
+      COBRAS1.1_10: 1195619493
+      COBRAS1.1_11: 35521901
+      COBRAS1.1_12: 1609867824
+      COBRAS1.1_13: -799115903
+      COBRAS1.1_14: 1761817837
+      COBRAS1.1_15: -1413155788
+      COBRAS1.1_16: 1279122026
+      COBRAS1.1_17: 978424689
+      COBRAS1.1_18: 1226294389
+      COBRAS1.1_19: 769464915
+      COBRAS1.1_2: -490138319
+      COBRAS1.1_20: 1960195203
+      COBRAS1.1_21: -112436282
+      COBRAS1.1_22: 1675718356
+      COBRAS1.1_23: 843581502
+      COBRAS1.1_24: 1778992756
+      COBRAS1.1_25: -1105007455
+      COBRAS1.1_26: -1976372075
+      COBRAS1.1_27: 1961651659
+      COBRAS1.1_28: -748720411
+      COBRAS1.1_29: 1450920370
+      COBRAS1.1_3: -760343870
+      COBRAS1.1_30: 22149776
+      COBRAS1.1_31: 72554375
+      COBRAS1.1_32: 86236872
+      COBRAS1.1_33: 713125702
+      COBRAS1.1_34: 714077922
+      COBRAS1.1_35: 1588237747
+      COBRAS1.1_36: -105992517
+      COBRAS1.1_37: -2107087661
+      COBRAS1.1_38: -1558694880
+      COBRAS1.1_39: 1684164227
+      COBRAS1.1_4: -1584336666
+      COBRAS1.1_40: -1691861549
+      COBRAS1.1_41: -706577127
+      COBRAS1.1_42: 793163460
+      COBRAS1.1_43: -1729617026
+      COBRAS1.1_44: 1740119859
+      COBRAS1.1_45: -1776826713
+      COBRAS1.1_46: -780569626
+      COBRAS1.1_47: -964207695
+      COBRAS1.1_48: -1872291334
+      COBRAS1.1_49: -1211263179
+      COBRAS1.1_5: -1729235506
+      COBRAS1.1_50: 992141391
+      COBRAS1.1_51: 1802342992
+      COBRAS1.1_52: -617868452
+      COBRAS1.1_53: -344513654
+      COBRAS1.1_54: -205038541
+      COBRAS1.1_55: 371157401
+      COBRAS1.1_56: 1784189482
+      COBRAS1.1_57: 514005540
+      COBRAS1.1_58: 1611085538
+      COBRAS1.1_59: 220756159
+      COBRAS1.1_6: -1741918000
+      COBRAS1.1_60: -1355293310
+      COBRAS1.1_61: 747884318
+      COBRAS1.1_62: -2057364547
+      COBRAS1.1_63: -540473697
+      COBRAS1.1_64: 729172356
+      COBRAS1.1_65: 1614137724
+      COBRAS1.1_66: 1378511670
+      COBRAS1.1_67: -1233875344
+      COBRAS1.1_68: 505886154
+      COBRAS1.1_69: 917879351
+      COBRAS1.1_7: -1562618471
+      COBRAS1.1_70: 1188207785
+      COBRAS1.1_71: 1903256996
+      COBRAS1.1_72: -246038879
+      COBRAS1.1_73: 272077078
+      COBRAS1.1_74: -1480584361
+      COBRAS1.1_75: 888964458
+      COBRAS1.1_76: 1899790946
+      COBRAS1.1_77: 1551990691
+      COBRAS1.1_8: 560432336
+      COBRAS1.1_9: 1340721517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

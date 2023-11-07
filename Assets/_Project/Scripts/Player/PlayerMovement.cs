@@ -30,9 +30,9 @@ public class PlayerMovement : MonoBehaviour {
         rigidbody.velocity = movement * movementSpeed * kMagicNumber;
        
         if (movement.x > 0 && isFacingRight) {
-            FlipHorizontal();
+            // FlipHorizontal();
         } else if (movement.x < 0 && !isFacingRight) {
-            FlipHorizontal();
+            // FlipHorizontal();
         }
 
         animator.SetFloat("Horizontal", movement.x);

@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: AudioClipsSO
   m_EditorClassIdentifier: 
   footSteps:
+  - {fileID: 8300000, guid: d88cbad2d217cd74ba1eb0899d6c55ad, type: 3}
   - {fileID: 8300000, guid: 74fb0bf68831ec14e8bbc1d6ab1dfba5, type: 3}
-  - {fileID: 8300000, guid: eaf994496ccc5594e8080f3b417dc6e4, type: 3}
-  - {fileID: 8300000, guid: d9a50401294cf994db997588f91d42e3, type: 3}
-  - {fileID: 8300000, guid: d6ebde4a3ada7fb4cb40b4aee74b36d5, type: 3}
+  - {fileID: 8300000, guid: dadaa610dcc8540478eb22b5eb22600d, type: 3}
   playerDeath:
   - {fileID: 8300000, guid: d45a457e0e8810a4393f8f69afbcaeba, type: 3}
   playerHurt:
   - {fileID: 8300000, guid: 883133fffbfc825499eb9c4b2ed56a0d, type: 3}
   shotFire:
-  - {fileID: 8300000, guid: 3054ada6e2d73834786ea39b2eddbb15, type: 3}
+  - {fileID: 8300000, guid: f48dcebbf1c86674c93243a33d7a3650, type: 3}
   shotHit:
-  - {fileID: 8300000, guid: 987059469494d224b995db032b94a8c1, type: 3}
+  - {fileID: 8300000, guid: d8b4df2d5d17a0f41853cc937e9996ca, type: 3}
   castFireBreath:
-  - {fileID: 8300000, guid: 3c209915cd5aea3498b6ebc123ebd5ae, type: 3}
+  - {fileID: 8300000, guid: 2a758e6f11cc7e947adf843135386936, type: 3}
   castLaser:
-  - {fileID: 8300000, guid: 8d530c3462669b54ab13d44065f77721, type: 3}
-  castExplosion: []
+  - {fileID: 8300000, guid: bed0127ded94f9140b07882788786ba7, type: 3}
+  castExplosion:
+  - {fileID: 8300000, guid: b6d4e9b8db30aff45bb4268c16d39420, type: 3}
   batMoving: []
   batAtack: []
   batDeath: []

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Reflection.Emit;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using static ImprovementManager;
+// using ImprovementManager;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -41,7 +41,6 @@ public class Player : ISingleton<Player>, ISoundPlayer {
         public float multiplier;
     }
 
-
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
 
@@ -59,7 +58,7 @@ public class Player : ISingleton<Player>, ISoundPlayer {
     private float explosionRangeMultiplier = 1f;
     private int extrasShots = 0;
     private float damagesMultiplier = 1f;
-    private bool isPiercingShots = false; // TODO: CHANGE TO INT
+    private int piercingShots = 0;
     private bool isExplosionWithFireTrails = false; // TODO: NOT IMPLEMENTED
     private bool isLaserWithGlobalRange = false;
     private bool isExplosionPositionFree = false;
@@ -76,8 +75,6 @@ public class Player : ISingleton<Player>, ISoundPlayer {
 
     private void Start() {
         ConstructPlayer();
-    
-        ImprovementManager.Instance.OnImprovementSelected += ImprovementManager_OnImprovementSelected;
     }
 
     private void ConstructPlayer() {
@@ -94,47 +91,42 @@ public class Player : ISingleton<Player>, ISoundPlayer {
             explosionRangeMultiplier: explosionRangeMultiplier, 
             extrasShots: extrasShots, 
             damagesMultiplier: damagesMultiplier, 
-            isPiercingShots: isPiercingShots, 
+            piercingShots: piercingShots, 
             isExplosionWithFireTrails: isExplosionWithFireTrails, 
             isLaserWithGlobalRange: isLaserWithGlobalRange, 
             isExplosionPositionFree: isExplosionPositionFree);
     }
 
-    // ISoundPlayer
-    // public void PlaySound(AudioClip audioClip, float volume) {
-    //     Debug.Log("SIA <AS");
-    // }
-
-    private void ImprovementManager_OnImprovementSelected(object sender, OnImprovementSelectedArgs args) {
-        switch (args.improvementSO.improvementType) {
+    public void AddImprovement(ImprovementSO improvementSO, int count) {
+        switch (improvementSO.improvementType) {
             case ImprovementType.MovementVelocityUp:
-                movementVelocityMultiplier = 1 + (args.count * 0.05f);
+                movementVelocityMultiplier = 1 + (count * 0.05f);
                 break;
             case ImprovementType.MaxLifeUp:
-                maxLifesMultiplier = 1 + (args.count * 0.1f);
+                maxLifesMultiplier = 1 + (count * 0.05f);
                 maxLifes *= maxLifesMultiplier;
                 lifes *= maxLifesMultiplier;
                 break;
             case ImprovementType.FireRateUp:
-                shotSpeedMultiplier = 1 + (args.count * 0.1f);
+                shotSpeedMultiplier = 1 + (count * 0.1f);
                 break;
             case ImprovementType.SlowDownEnemyOnHit:
-                slowEnemyMultiplier = 1 + (args.count * 0.05f);
+                slowEnemyMultiplier = 1 + (count * 0.05f);
                 break;
             case ImprovementType.HealOnKill:
-                recoverLifeMultiplierOnKill = 1 + (args.count * 0.05f);
+                recoverLifeMultiplierOnKill = 1 + (count * 0.01f);
                 break;
             case ImprovementType.IncreaseExplosionSpellRange:
-                explosionRangeMultiplier = 1 + (args.count * 0.1f);
+                explosionRangeMultiplier = 1 + (count * 0.1f);
                 break;
             case ImprovementType.ExtraShot:
-                extrasShots += args.count;
+                extrasShots += count;
                 break;
             case ImprovementType.ExtraDamage:
-                damagesMultiplier = 1 + (args.count * 1f);
+                damagesMultiplier = 1 + (count * 1f);
                 break;
             case ImprovementType.PiercingShot:
-                isPiercingShots = true;
+                piercingShots = count;
                 break;
             case ImprovementType.ExplosionSpellFireTrail:
                 isExplosionWithFireTrails = true;
@@ -240,6 +232,10 @@ public class Player : ISingleton<Player>, ISoundPlayer {
         return playerController;
     }
 
+    public PlayerShot GetPlayerShot() {
+        return playerController.GetPlayerShot();
+    }
+
     public void Move(Vector2 movement) {
         playerController.Move(movement);
     }
@@ -257,7 +253,7 @@ recoverLifeMultiplierOnKill: {recoverLifeMultiplierOnKill}
 explosionRangeMultiplier: {explosionRangeMultiplier}
 extrasShots: {extrasShots}
 damagesMultiplier: {damagesMultiplier}
-isPiercingShots: {isPiercingShots}
+isPiercingShots: {piercingShots}
 isExplosionWithFireTrails: {isExplosionWithFireTrails}
 isLaserWithGlobalRange: {isLaserWithGlobalRange}
 isExplosionPositionFree: {isExplosionPositionFree}

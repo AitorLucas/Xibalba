@@ -9,6 +9,6 @@ public abstract class ISingleton<T> : MonoBehaviour where T: ISingleton<T> {
             return;
         }
         Instance = this as T;
-        DontDestroyOnLoad(this);
+        // DontDestroyOnLoad(this);
     }
 }

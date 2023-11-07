@@ -7,6 +7,7 @@ public class ImprovementManager : ISingleton<ImprovementManager> {
 
     [SerializeField] Improvements_UI improvements_UI;
     [SerializeField] List<ImprovementSO> improvementsSOList;
+    [SerializeField] ImprovementSO lastImprovementSO;
 
     public EventHandler<OnImprovementStartSelectionArgs> OnImprovementStartSelection;
     public class OnImprovementStartSelectionArgs: EventArgs {
@@ -29,6 +30,10 @@ public class ImprovementManager : ISingleton<ImprovementManager> {
 
     public void StartImprovementsSelection() {
         improvements_UI.StartImprovementsSelection(GetRandomImprovements(count: 3));
+    }
+
+    public void StartLastImprovementSelection() {
+        improvements_UI.StartImprovementsSelection(new List<ImprovementSO> { lastImprovementSO, lastImprovementSO, lastImprovementSO });
     }
 
     private List<ImprovementSO> GetRandomImprovements(int count) {

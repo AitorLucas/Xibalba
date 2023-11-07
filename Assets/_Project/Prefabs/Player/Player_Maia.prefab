@@ -17,17 +17,22 @@ PrefabInstance:
     - target: {fileID: 4141750316403636224, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4141750316403636224, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.y
-      value: 1.9
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141750316403636224, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4141750316403636224, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5080021471446266749, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
@@ -105,17 +110,17 @@ PrefabInstance:
     - target: {fileID: 6970523143780519751, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6970523143780519751, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6970523143780519751, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6970523143780519751, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
@@ -175,18 +180,18 @@ PrefabInstance:
     - target: {fileID: 7670311383958587984, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.32
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 7670311383958587984, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.32
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7670311383958587984, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -859677223, guid: 8aab9df98675bf54e846eb7155072c96,
+      objectReference: {fileID: -1251601602, guid: 5db33b4c70df2354cb80b927a79a27de,
         type: 3}
     - target: {fileID: 7670311383958587984, guid: c8eb66c9de62c4b46bee82dbb25ab95f,
         type: 3}
